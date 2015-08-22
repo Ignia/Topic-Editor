@@ -1,0 +1,80 @@
+.x-panel-body {
+  height: 1000px !important;
+  }
+
+#DynamicForm {
+  color: #000;
+  margin-top: 30px;
+  }
+
+#DynamicForm span.Label, #DynamicForm span.Description {
+  display: block;
+  }
+
+#DynamicForm ul li {
+  margin-bottom: 0px;
+  }
+
+.x-tab-strip li {
+  margin-bottom: 0px ! important;
+  }
+
+.Label {
+  font-weight: bold;
+  margin-top: 5px;
+  padding: 0px;
+  margin: 0px;
+  }
+
+.Description {
+  font-size: 10px;
+  color: #aaa;
+  padding: 0px;
+  margin: 0px;
+  }
+  
+div.AddTopic select {
+  margin-top: 7px;
+  }
+
+.Actions {
+  text-align: right;
+  }
+
+.Actions.Top {
+  position: absolute;
+  top: 32px;
+  right: 30px;
+  z-index: 99;
+  }
+  
+.Actions input {
+  padding: 1px 5px;
+  }
+  
+dt {
+  float: left;
+  clear: left;
+  width: 100px;
+  }
+
+H2.Subtitle {
+  display: none;
+  }
+
+/* Required field default class */
+.Required {
+  color: #0099FF;
+  }
+Input.Required {
+  color: #000000;
+  }
+
+/* Error field default class */
+.Error {
+  color: #FF3300;
+  }
+Input.Error {
+  border: dashed 1px #FF3300 !important;
+  color: #FF3300;
+  }
