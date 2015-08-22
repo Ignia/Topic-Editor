@@ -65,7 +65,7 @@
   /*=========================================================================================================================
   | SKIP DISABLED AND CONFIGURATION
   \------------------------------------------------------------------------------------------------------------------------*/
-    if (topic.GetAttribute("IsInactive") == "1" || topic.GetAttribute("IsDisabled") == "1") return "";
+    if (topic.Attributes.Get("IsInactive") == "1" || topic.Attributes.Get("IsDisabled") == "1") return "";
     if (topic.UniqueKey.StartsWith("Root:Configuration")) return "";
 
   /*=========================================================================================================================
@@ -86,7 +86,7 @@
   /*=========================================================================================================================
   | LOOP THROUGH ATTRIBUTES
   \------------------------------------------------------------------------------------------------------------------------*/
-    output += indent + "\n    <DataObject type=\"" + topic.GetAttribute("ContentType", "Page") + "\">";
+    output += indent + "\n    <DataObject type=\"" + topic.Attributes.Get("ContentType", "Page") + "\">";
     foreach (AttributeValue attribute in topic.Attributes) {
       if (Array.IndexOf(_excludeAttributes, attribute.Key) >= 0) continue;
       if (topic.Attributes[attribute.Key].Value.Length > 256) continue;

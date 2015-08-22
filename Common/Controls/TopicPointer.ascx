@@ -122,8 +122,8 @@
   /*----------------------------------------------------------------------------------------------------------------------------
   | Check PageTopic for TopicID Attribute - if available, set Value
   \---------------------------------------------------------------------------------------------------------------------------*/
-    if (PageTopic != null && !String.IsNullOrEmpty(PageTopic.GetAttribute("TopicID"))) {
-      Value                     = PageTopic.GetAttribute("TopicID");
+    if (PageTopic != null && !String.IsNullOrEmpty(PageTopic.Attributes.Get("TopicID"))) {
+      Value                     = PageTopic.Attributes.Get("TopicID");
     }
 
   /*----------------------------------------------------------------------------------------------------------------------------

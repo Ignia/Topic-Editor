@@ -255,7 +255,7 @@
                     <!-- Site Description -->
                     <div class="<%# (IsModal? "col-md-12 col-sm-12 Modal" : "col-md-10 col-sm-9") %> Page-Title-Area">
                       <asp:ContentPlaceHolder ID="PageTitleArea" RunAt="Server">
-                        <h2 class="Page-Title"><%# (PageTopic == TopicRepository.RootTopic)? Page.Title : PageTopic.GetAttribute("Title", PageTopic.Key) %></h2>
+                        <h2 class="Page-Title"><%# (PageTopic == TopicRepository.RootTopic)? Page.Title : PageTopic.Attributes.Get("Title", PageTopic.Key) %></h2>
                       </asp:ContentPlaceHolder>
                     </div>
                     <!-- /Site Description -->

@@ -96,7 +96,7 @@
   \--------------------------------------------------------------------------------------------------------------------------*/
     public bool DisableDelete {
       get {
-        if (!IsNew && (this.Topic.GetAttribute("DisableDelete").Equals("1") || this.Topic.ContentType.Key == "List")) {
+        if (!IsNew && (this.Topic.Attributes.Get("DisableDelete").Equals("1") || this.Topic.ContentType.Key == "List")) {
           return true;
           }
         else {
@@ -240,7 +240,7 @@
         \--------------------------------------------------------------------------------------------------------------------*/
           _contentTypeAttributes                = _contentTypeAttributes
                                                   .OrderBy(contentTypeAttribute => contentTypeAttribute.DisplayGroup)
-                                                  .ThenBy(contentTypeAttribute => Int32.Parse(contentTypeAttribute.GetAttribute("SortOrder", "25")))
+                                                  .ThenBy(contentTypeAttribute => Int32.Parse(contentTypeAttribute.Attributes.Get("SortOrder", "25")))
                                                   .ThenBy(contentTypeAttribute => contentTypeAttribute.Title)
                                                   .ToList();
           }
@@ -399,7 +399,7 @@
         HyperLink       description             = new HyperLink();
 
         string          key                     = contentTypeAttribute.Key;
-        string          typeName                = contentTypeAttribute.GetAttribute("Type", "FormField.ascx");
+        string          typeName                = contentTypeAttribute.Attributes.Get("Type", "FormField.ascx");
         string          tagName                 = typeName.Substring(0, typeName.LastIndexOf("."));
 
         string          defaultConfiguration    = contentTypeAttribute.DefaultConfiguration;
@@ -445,15 +445,15 @@
       | placeholder attribute). It is up to each Attribute control, however, to determine if and how the InheritedValue is
       | rendered.
       >------------------------------------------------------------------------------------------------------------------------
-      | ### NOTE JJC092213: When calling GetAttribute(), it is not possible to identify whether the value was inherited or not.
+      | ### NOTE JJC092213: When calling Attributes.Get(), it is not possible to identify whether the value was inherited or not.
       | To mitigate this, the InheritedValue explicitly checks for a Topic Pointer and grabs the inherited value from the
-      | referenced object. Typically, this isn't necessary as GetAttribute() will automatically fallback to the Topic Pointer
+      | referenced object. Typically, this isn't necessary as Attributes.Get() will automatically fallback to the Topic Pointer
       | if it exists.
       \----------------------------------------------------------------------------------------------------------------------*/
         string inheritedValue = null;
 
         if (this.Topic.DerivedTopic != null) {
-          inheritedValue = this.Topic.DerivedTopic.GetAttribute(key);
+          inheritedValue = this.Topic.DerivedTopic.Attributes.Get(key);
           }
 
       /*-----------------------------------------------------------------------------------------------------------------------
@@ -484,7 +484,7 @@
               }
             }
           else {
-            control.Value                       = this.Topic.GetAttribute(key, null, false, 0);
+            control.Value                       = this.Topic.Attributes.Get(key, null, false, 0);
             control.InheritedValue              = inheritedValue;
             }
           }
@@ -552,7 +552,7 @@
   | Returns true or false based on whether the Content Type attribute is available and not empty.
   \--------------------------------------------------------------------------------------------------------------------------*/
     public bool GetAttributeAsBool (Topic topic, string name, bool defaultValue = false) {
-      string            value                   = topic.GetAttribute(name);
+      string            value                   = topic.Attributes.Get(name);
       if (String.IsNullOrEmpty(value)) {
         return defaultValue;
         }

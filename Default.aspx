@@ -201,7 +201,7 @@
               <a href="Default.aspx?Path=<%# ((IsNew)? Topic.Parent.UniqueKey : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.UniqueKey : "#")) %>"class="btn btn-ancillary btn-sm">Cancel</a>
             </asp:PlaceHolder>
 
-            <button id="DeletePageButtonTop" Visible=<%# !IsNew %> Disabled=<%# DisableDelete || ContentType.GetAttribute("DisableDelete").Equals("1") %> class="btn btn-default btn-sm" onclick="if (!confirmDelete()) return false;" onserverclick="DeleteTopic" RunAt="Server">Delete</button>
+            <button id="DeletePageButtonTop" Visible=<%# !IsNew %> Disabled=<%# DisableDelete || ContentType.Attributes.Get("DisableDelete").Equals("1") %> class="btn btn-default btn-sm" onclick="if (!confirmDelete()) return false;" onserverclick="DeleteTopic" RunAt="Server">Delete</button>
 
             <asp:Button id="SavePageButtonTop" OnClick="SaveTopic" CssClass="btn btn-primary btn-sm" Text="Save" RunAt="Server" />
 
