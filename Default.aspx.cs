@@ -484,7 +484,7 @@
               }
             }
           else {
-            control.Value                       = this.Topic.Attributes.Get(key, null, false, 0);
+            control.Value                       = this.Topic.Attributes.Get(key, null, false, false);
             control.InheritedValue              = inheritedValue;
             }
           }
