@@ -765,16 +765,29 @@
   [ WebMethod ]
     public static bool MoveNode(int topicId, int targetTopicId, int siblingId) {
 
-      Topic topic  = TopicRepository.RootTopic.GetTopic(topicId);
-      Topic target = TopicRepository.RootTopic.GetTopic(targetTopicId);
-      topic.Parent = target;
-      lock(TopicRepository.RootTopic) {
+      /*------------------------------------------------------------------------------------------------------------------------
+      | Retrieve the source and destination topics
+      \-----------------------------------------------------------------------------------------------------------------------*/
+      Topic     topic   = TopicRepository.RootTopic.GetTopic(topicId);
+      Topic     target  = TopicRepository.RootTopic.GetTopic(targetTopicId);
+
+      /*------------------------------------------------------------------------------------------------------------------------
+      | Reset the source topic's Parent only if it is different than the current Parent
+      \-----------------------------------------------------------------------------------------------------------------------*/
+      if (topic.Parent != target) {
+        topic.Parent = target;
+      }
+
+      /*------------------------------------------------------------------------------------------------------------------------
+      | Move the topic and/or reorder it with its siblings
+      \-----------------------------------------------------------------------------------------------------------------------*/
+      lock (TopicRepository.RootTopic) {
         if (siblingId > 0) {
           Topic sibling = TopicRepository.RootTopic.GetTopic(siblingId);
-          topic.Move(target, sibling);
+          topic.Move(topic, target, sibling);
           }
         else {
-          topic.Move(target);
+          TopicRepository.Move(topic, target);
           }
         }
       return true;
