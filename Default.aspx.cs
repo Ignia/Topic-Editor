@@ -771,10 +771,10 @@
       lock(TopicRepository.RootTopic) {
         if (siblingId > 0) {
           Topic sibling = TopicRepository.RootTopic.GetTopic(siblingId);
-          TopicRepository.Move(topic, target, sibling);
+          topic.Move(target, sibling);
           }
         else {
-          TopicRepository.Move(topic, target);
+          topic.Move(target);
           }
         }
       return true;
