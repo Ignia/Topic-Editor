@@ -176,7 +176,7 @@
   | If the Topic is not new, set the TopicID Attribute for the current (Page) Topic; otherwise, create and save a new Topic
   \---------------------------------------------------------------------------------------------------------------------------*/
     if (!IsNew) {
-      PageTopic.Attributes.SetAttributeValue("TopicID", selectedTopicId.ToString());
+      PageTopic.Attributes.Set("TopicID", selectedTopicId.ToString());
     }
     else {
 
@@ -191,15 +191,15 @@
 
     //Set Key
       derivedTopic.Key          = selectedTopic.Key;
-      derivedTopic.Attributes.SetAttributeValue("Key", selectedTopic.Key);
+      derivedTopic.Attributes.Set("Key", selectedTopic.Key);
 
     //Set ContentType
       derivedTopic.ContentType  = selectedTopic.ContentType;
-      derivedTopic.Attributes.SetAttributeValue("ContentType", selectedTopic.ContentType.Key);
+      derivedTopic.Attributes.Set("ContentType", selectedTopic.ContentType.Key);
 
     //Set Parent
       derivedTopic.Parent       = PageTopic;
-      derivedTopic.Attributes.SetAttributeValue("ParentID", PageTopic.Id.ToString());
+      derivedTopic.Attributes.Set("ParentID", PageTopic.Id.ToString());
 
     //Double-check there are no siblings with the same Key; if there are, add time stamp to Key to differentiate
       foreach (Topic topic in derivedTopic.Parent) {
