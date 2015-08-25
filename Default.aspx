@@ -98,9 +98,7 @@
                 siblingId = newParent.childNodes[position-1].id; // TODO: double check indexing here
                 }
 
-            //Ext.Msg.alert("Debugging", "Node: " + node.attributes.id + ", Parent: " + newParent.attributes.id + ", Sibling: " + siblingId);
-
-              console.log("Node: " + node.attributes.id + ", Parent: " + newParent.attributes.id + ", Sibling: " + siblingId);
+            //console.log("Node: " + node.attributes.id + ", Parent: " + newParent.attributes.id + ", Sibling: " + siblingId);
 
               PageMethods.MoveNode(
                 node.attributes.id,
