@@ -772,11 +772,9 @@
       Topic     target  = TopicRepository.RootTopic.GetTopic(targetTopicId);
 
       /*------------------------------------------------------------------------------------------------------------------------
-      | Reset the source topic's Parent only if it is different than the current Parent
+      | Reset the source topic's Parent
       \-----------------------------------------------------------------------------------------------------------------------*/
-      if (topic.Parent != target) {
-        topic.Parent = target;
-      }
+      topic.Parent = target;
 
       /*------------------------------------------------------------------------------------------------------------------------
       | Move the topic and/or reorder it with its siblings
