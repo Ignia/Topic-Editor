@@ -642,7 +642,7 @@ public partial class TopicsEditorPage : TopicPage {
               topic.Attributes.Add(new AttributeValue(contentTypeAttribute.Key, control.Value));
             }
             else {
-              topic.Attributes[contentTypeAttribute.Key].Value  = control.Value;
+              topic.Attributes.Set(contentTypeAttribute.Key, control.Value);
             }
           }
         }
@@ -655,7 +655,7 @@ public partial class TopicsEditorPage : TopicPage {
           topic.Attributes.Add(new AttributeValue("ContentType", ContentType.Key));
         }
         else {
-          topic.Attributes["ContentType"].Value                 = ContentType.Key;
+          topic.Attributes.Set("ContentType", ContentType.Key);
         }
       }
 
