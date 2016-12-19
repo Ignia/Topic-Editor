@@ -379,7 +379,7 @@ public partial class TopicsEditorPage : TopicPage {
         parseControl                    = Page.ParseControl("<%@ Register TagPrefix=\"ITE\" TagName=\"" + tagName + "\" Src=\"Common/Controls/" + typeName + "\" %><ITE:" + tagName + " " + defaultConfiguration + " ID=\"" + key + "\" ClientIDMode=\"Predictable\" RunAt=\"Server\" />");
       }
       catch(Exception ex) {
-        throw new HttpParseException("Error parsing '" + tagName + "' for attribute '" + key + "'", ex.Message);
+        throw new HttpParseException("Error parsing '" + tagName + "' for attribute '" + key + "'", ex);
       }
 
       // ParseControl returns a collection a control containing the collection of controls resulting from the parsing.
