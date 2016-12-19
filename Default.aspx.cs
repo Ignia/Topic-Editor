@@ -766,11 +766,11 @@ public partial class TopicsEditorPage : TopicPage {
     \-------------------------------------------------------------------------------------------------------------------------*/
     lock (TopicRepository.RootTopic) {
       if (siblingId > 0) {
-        Topic sibling = TopicRepository.RootTopic.GetTopic(siblingId);
-        topic.Move(topic, target, sibling);
+        Topic sibling           = TopicRepository.RootTopic.GetTopic(siblingId);
+        topic.Move(target, sibling);
       }
       else {
-        TopicRepository.Move(topic, target);
+        TopicRepository.Move(target);
       }
     }
 
