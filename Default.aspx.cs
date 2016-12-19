@@ -178,7 +178,7 @@ public partial class TopicsEditorPage : TopicPage {
       \-----------------------------------------------------------------------------------------------------------------------*/
       if (contentType == null || TopicRepository.ContentTypes[contentType] == null) {
         // _contentType         = TopicRepository.ContentTypes["Container"];
-        throw new Exception("The ContentType '" + contentType + "' could not be found in the TopicRepository.ContentTypes collection, which contains " + TopicRepository.ContentTypes.Count + " values.");
+        throw new InvalidOperationException("The ContentType '" + contentType + "' could not be found in the TopicRepository.ContentTypes collection, which contains " + TopicRepository.ContentTypes.Count + " values.");
       }
       else {
         _contentType            = TopicRepository.ContentTypes[contentType];
@@ -379,7 +379,7 @@ public partial class TopicsEditorPage : TopicPage {
         parseControl                    = Page.ParseControl("<%@ Register TagPrefix=\"ITE\" TagName=\"" + tagName + "\" Src=\"Common/Controls/" + typeName + "\" %><ITE:" + tagName + " " + defaultConfiguration + " ID=\"" + key + "\" ClientIDMode=\"Predictable\" RunAt=\"Server\" />");
       }
       catch(Exception ex) {
-        throw new Exception("Error parsing '" + tagName + "' for attribute '" + key + "'", ex);
+        throw new HttpParseException("Error parsing '" + tagName + "' for attribute '" + key + "'", ex.Message);
       }
 
       // ParseControl returns a collection a control containing the collection of controls resulting from the parsing.
@@ -619,7 +619,7 @@ public partial class TopicsEditorPage : TopicPage {
 
           // Debug
           if (control == null) {
-            throw new Exception("Could not find expected control for '" + contentTypeAttribute.Key + "'.");
+            throw new NullReferenceException("Could not find expected control for '" + contentTypeAttribute.Key + "'.");
           }
 
           // Set Treeview control nodes to form field
