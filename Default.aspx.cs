@@ -264,7 +264,7 @@ public partial class TopicsEditorPage : TopicPage {
     BindVersionsList();
 
     /*--------------------------------------------------------------------------------------------------------------------------
-    | ENSURE DATA BINDING
+    | Ensure data binding
     \-------------------------------------------------------------------------------------------------------------------------*/
     // ###NOTE JJC100213: Data Binding must be performed in Page_Init in order for the dropdown lists to retain their selected
     // values. If it is called later (e.g, in Page_Load), either initially, or in duplicate, then the SelectedValue of the
