@@ -770,7 +770,7 @@ public partial class TopicsEditorPage : TopicPage {
         topic.Move(target, sibling);
       }
       else {
-        TopicRepository.Move(target);
+        topic.Move(target);
       }
     }
 
