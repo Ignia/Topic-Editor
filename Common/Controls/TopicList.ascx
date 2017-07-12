@@ -210,7 +210,7 @@
       containerScroll           : true,
       border                    : false,
       baseCls                   : 'TreeView',
-      dataUrl                   : 'Client/Topics.Json.aspx?Scope=<%# PageTopic.UniqueKey + ":" + Attribute.Key %>',
+      dataUrl                   : 'Client/Topics.Json.aspx?Scope=<%# PageTopic.UniqueKey + ":" + Attribute.Key %>&ShowAll=true',
       root                      : new Ext.tree.AsyncTreeNode({}),
       rootVisible               : false,
       listeners                 : {
