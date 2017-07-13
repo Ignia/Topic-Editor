@@ -238,9 +238,11 @@
     \-------------------------------------------------------------------------------------------------------------------------*/
       Collection<Topic> topics          = new Collection<Topic>();
       Topic             topic           = new Topic();
+
       if (Scope != null) {
         topic                           = TopicRepository.RootTopic.GetTopic(Scope);
         }
+
     //Use RootTopic if Scope is available but does not return a topic object
       if (topic == null) {
         topic                           = TopicRepository.RootTopic;
@@ -250,7 +252,7 @@
     | FILTER TOPICS SELECTION LIST BY ATTRIBUTENAME/ATTRIBUTEVALUE
     \-------------------------------------------------------------------------------------------------------------------------*/
       if (AttributeName != null && AttributeValue != null) {
-        topics                          = topic.FindAllByAttribute(AttributeName, AttributeValue, true);
+        topics                          = topic.FindAllByAttribute(AttributeName, AttributeValue);
         }
 
     /*--------------------------------------------------------------------------------------------------------------------------
