@@ -247,7 +247,7 @@
                     <asp:PlaceHolder Visible=<%# !IsModal %> RunAt="Server">
                       <!-- Site Name -->
                       <div class="col-md-2 col-sm-3 Site-Name">
-                        <h1 class="h2">OnTopic</h1>
+                        <h1 class="h2"><a href="/!Admin/Topics/Default.aspx" style="color:rgb(255,255,255);text-decoration:none;">OnTopic</a></h1>
                       </div>
                       <!-- /Site Name -->
                     </asp:PlaceHolder>
