@@ -145,7 +145,7 @@ public partial class TopicsEditorPage : TopicPage {
   /// <summary>
   ///   Identifies the ContentType topic based on the QueryString(for new topics) or the ContentType attribute of the current
   ///   this.Topic.
-  /// </summary>  
+  /// </summary>
   public ContentType ContentType {
     get {
 
@@ -264,7 +264,7 @@ public partial class TopicsEditorPage : TopicPage {
     BindVersionsList();
 
     /*--------------------------------------------------------------------------------------------------------------------------
-    | Ensure data binding
+    | ENSURE DATA BINDING
     \-------------------------------------------------------------------------------------------------------------------------*/
     // ###NOTE JJC100213: Data Binding must be performed in Page_Init in order for the dropdown lists to retain their selected
     // values. If it is called later (e.g, in Page_Load), either initially, or in duplicate, then the SelectedValue of the
@@ -414,7 +414,7 @@ public partial class TopicsEditorPage : TopicPage {
       // placeholder attribute). It is up to each Attribute control, however, to determine if and how the InheritedValue is
       // rendered.
       // -----------------------------------------------------------------------------------------------------------------------
-      // ### NOTE JJC092213: When calling Attributes.Get(), it is not possible to identify whether the value was inherited or 
+      // ### NOTE JJC092213: When calling Attributes.Get(), it is not possible to identify whether the value was inherited or
       // not. To mitigate this, the InheritedValue explicitly checks for a Topic Pointer and grabs the inherited value from the
       // referenced object. Typically, this isn't necessary as Attributes.Get() will automatically fallback to the Topic Pointer
       // if it exists.
@@ -593,7 +593,7 @@ public partial class TopicsEditorPage : TopicPage {
   \---------------------------------------------------------------------------------------------------------------------------*/
   /// <summary>
   ///   Fires when the user clicks the "Save" button; saves modified topic attributes to the database store.
-  /// </summary>  
+  /// </summary>
   public void SaveTopic (Object Src, EventArgs E) {
 
     /*--------------------------------------------------------------------------------------------------------------------------
@@ -624,7 +624,19 @@ public partial class TopicsEditorPage : TopicPage {
 
           // Set Treeview control nodes to form field
           if (control is Relationships) {
-            topic.SetRelationship(((Relationships)control).Namespace, control.Value);
+            List<string> relatedTopics  = control.Value.Split(',').ToList();
+            foreach (string topicIdString in relatedTopics) {
+              int topicIdInt;
+              Topic relatedTopic        = null;
+              bool isTopicId            = Int32.TryParse(topicIdString, out topicIdInt);
+              if (isTopicId && topicIdInt > 0) {
+                relatedTopic            = TopicRepository.RootTopic.GetTopic(topicIdInt);
+              }
+              if (relatedTopic != null) {
+                topic.SetRelationship(((Relationships)control).Namespace, relatedTopic);
+              }
+            }
+            //topic.SetRelationship(((Relationships)control).Namespace, control.Value);
           }
 
           // Force Key change to go through property to ensure proper handling of renames.
