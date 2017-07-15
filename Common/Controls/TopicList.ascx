@@ -141,7 +141,7 @@
         Topic   topics          = Topic.Create(Attribute.Key, "List");
 
         topics.Parent           = PageTopic;
-        topics.Save();
+        TopicRepository.DataProvider.Save(topics);
 
         }
 

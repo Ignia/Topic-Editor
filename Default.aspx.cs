@@ -542,7 +542,7 @@ public partial class TopicsEditorPage : TopicPage {
     /*--------------------------------------------------------------------------------------------------------------------------
     | Initiate rollback
     \-------------------------------------------------------------------------------------------------------------------------*/
-    this.Topic.Rollback(versionDateTime);
+    TopicRepository.DataProvider.Rollback(this.Topic, versionDateTime);
 
     /*--------------------------------------------------------------------------------------------------------------------------
     | Repopulate dropdown
@@ -566,7 +566,7 @@ public partial class TopicsEditorPage : TopicPage {
     | Lock the Topic repository before executing the delete
     \-------------------------------------------------------------------------------------------------------------------------*/
     lock (TopicRepository.RootTopic) {
-      this.Topic.Delete();
+      TopicRepository.DataProvider.Delete(this.Topic);
     }
 
     /*--------------------------------------------------------------------------------------------------------------------------
@@ -681,7 +681,7 @@ public partial class TopicsEditorPage : TopicPage {
     /*--------------------------------------------------------------------------------------------------------------------------
     | Execute save
     \-------------------------------------------------------------------------------------------------------------------------*/
-    topic.Save();
+    TopicRepository.DataProvider.Save(topic);
 
     /*--------------------------------------------------------------------------------------------------------------------------
     | If the editor is in modal view, close the window and return the topic's UniqueKey; otherwise, conditionally redirect to
@@ -779,10 +779,10 @@ public partial class TopicsEditorPage : TopicPage {
     lock (TopicRepository.RootTopic) {
       if (siblingId > 0) {
         Topic sibling           = TopicRepository.RootTopic.GetTopic(siblingId);
-        topic.Move(target, sibling);
+        TopicRepository.DataProvider.Move(topic, target, sibling);
       }
       else {
-        topic.Move(target);
+        TopicRepository.DataProvider.Move(topic, target);
       }
     }
 

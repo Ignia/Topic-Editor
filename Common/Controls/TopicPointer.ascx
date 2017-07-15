@@ -209,7 +209,7 @@
       }
 
     //Save Topic
-      derivedTopic.Save();
+      TopicRepository.DataProvider.Save(derivedTopic);
 
     //Close modal
       StringBuilder     closeModalScript = new StringBuilder();
