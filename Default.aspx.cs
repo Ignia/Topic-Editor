@@ -74,7 +74,7 @@ public partial class TopicsEditorPage : TopicPage {
   /// </summary>
   public bool DisableDelete {
     get {
-      if (!IsNew && (this.Topic.Attributes.Get("DisableDelete").Equals("1") || this.Topic.ContentType.Key == "List")) {
+      if (!IsNew && (this.Topic.Attributes.Get("DisableDelete").Equals("1") || this.Topic.Attributes.Get("ContentType", "") == "List")) {
         return true;
       }
       else {
@@ -162,8 +162,8 @@ public partial class TopicsEditorPage : TopicPage {
       /*------------------------------------------------------------------------------------------------------------------------
       | Look up existing/current Topic Content Type
       \-----------------------------------------------------------------------------------------------------------------------*/
-      if (!IsNew && this.Topic != null && this.Topic.ContentType != null) {
-        contentType             = this.Topic.ContentType.Key;
+      if (!IsNew && this.Topic != null && !String.IsNullOrEmpty(this.Topic.Attributes.Get("ContentType", ""))) {
+        contentType             = this.Topic.Attributes.Get("ContentType");
       }
 
       /*------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +177,6 @@ public partial class TopicsEditorPage : TopicPage {
       | Look up ContentType Topic
       \-----------------------------------------------------------------------------------------------------------------------*/
       if (contentType == null || TopicRepository.ContentTypes[contentType] == null) {
-        // _contentType         = TopicRepository.ContentTypes["Container"];
         throw new InvalidOperationException("The ContentType '" + contentType + "' could not be found in the TopicRepository.ContentTypes collection, which contains " + TopicRepository.ContentTypes.Count + " values.");
       }
       else {
@@ -579,7 +578,7 @@ public partial class TopicsEditorPage : TopicPage {
       closeOnDeleteScript.Append(@"</script>");
       ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "CloseModalOnDelete", closeOnDeleteScript.ToString(), false);
     }
-    else if (topic.ContentType.Key == "List") {
+    else if (topic.Attributes.Get("ContentType", "") == "List") {
       Response.Redirect("?Path=" + topic.Parent.UniqueKey + "&DeletedTopic=" + deletedTopic + "&DeletedFrom=" + topic.Title + "&Action=Deleted");
     }
     else {
@@ -695,12 +694,6 @@ public partial class TopicsEditorPage : TopicPage {
       closeOnSaveScript.Append(@"</script>");
       ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "CloseModalOnSave", closeOnSaveScript.ToString(), false);
     }
-    /*
-    else if (topic.Parent.ContentType.Key == "List") {
-      // Response.Redirect("?Path=" + topic.Parent.Parent.UniqueKey + "&TopicID=" + topic.Id + "&Action=Saved");
-      // Do not redirect
-    }
-    */
     else if (topic.UniqueKey != Request.QueryString["Path"]) {
       Response.Redirect("?Path=" + topic.UniqueKey + "&Action=Saved");
     }

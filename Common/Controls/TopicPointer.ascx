@@ -105,7 +105,7 @@
   public string ContentType {
     get {
       if (_contentType == null && PageTopic != null) {
-        _contentType = PageTopic.ContentType.Key;
+        _contentType = PageTopic.Attributes.Get("ContentType");
       }
       return _contentType;
     }
@@ -194,8 +194,8 @@
       derivedTopic.Attributes.Set("Key", selectedTopic.Key);
 
     //Set ContentType
-      derivedTopic.ContentType  = selectedTopic.ContentType;
-      derivedTopic.Attributes.Set("ContentType", selectedTopic.ContentType.Key);
+      derivedTopic.ContentType  = selectedTopic.Attributes.Get("ContentType");
+      derivedTopic.Attributes.Set("ContentType", selectedTopic.Attributes.Get("ContentType"));
 
     //Set Parent
       derivedTopic.Parent       = PageTopic;
