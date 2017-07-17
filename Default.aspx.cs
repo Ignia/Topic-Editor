@@ -16,7 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Ignia.Topics;
-using Ignia.Topics.Editor;
+using Ignia.Topics.Web.Editor;
 using Ignia.Topics.Web;
 
 /*==============================================================================================================================

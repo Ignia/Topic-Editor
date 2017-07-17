@@ -1,7 +1,7 @@
-<%@ Control Language="C#" ClassName="Boolean" Inherits="Ignia.Topics.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="Boolean" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
 
 <%@ Import Namespace="Ignia.Topics" %>
-<%@ Import Namespace="Ignia.Topics.Editor" %>
+<%@ Import Namespace="Ignia.Topics.Web.Editor" %>
 <%@ Import Namespace="System.Linq" %>
 
 <Script RunAt="Server">

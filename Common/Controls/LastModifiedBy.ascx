@@ -1,4 +1,4 @@
-<%@ Control Language="C#" ClassName="LastModifiedBy" Inherits="Ignia.Topics.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="LastModifiedBy" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
 
 <%@ Import Namespace="System.Web" %>
 <%@ Import Namespace="Ignia.Topics" %>

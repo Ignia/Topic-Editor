@@ -1,4 +1,4 @@
-<%@ Control Language="C#" ClassName="Wysiwyg" Inherits="Ignia.Topics.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="Wysiwyg" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
 
 <%@ Import Namespace="Ignia.Topics" %>
 

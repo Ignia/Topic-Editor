@@ -32,13 +32,13 @@
   using System.Web.UI.WebControls;
   using System.Drawing;
   using Ignia.Topics;
-  using Ignia.Topics.Editor;
+  using Ignia.Topics.Web.Editor;
 
 /*==============================================================================================================================
 | CLASS: IGNIA FORM FIELD
 \-----------------------------------------------------------------------------------------------------------------------------*/
 [ Themeable(true) ]
-  public partial class IgniaFormField : Ignia.Topics.Editor.AttributeTypeControl {
+  public partial class IgniaFormField : Ignia.Topics.Web.Editor.AttributeTypeControl {
 
   /*============================================================================================================================
   | DECLARE PUBLIC FIELDS
