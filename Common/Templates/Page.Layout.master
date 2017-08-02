@@ -1,5 +1,5 @@
 <%@ Master ClassName="EditorPageLayout" Language="C#" %>
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="Topics=Ignia.Topics" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <Script RunAt="Server">
 
@@ -323,7 +323,7 @@
                 <asp:Panel Visible=<%# (Request.QueryString["Debug"] != null) %> RunAt="Server">
                   <h2>Topic Attributes</h2>
                   <ul>
-                    <% foreach (AttributeValue attributeValue in PageTopic.Attributes) {
+                    <% foreach (Topics.AttributeValue attributeValue in PageTopic.Attributes) {
                          if (attributeValue.Value == "Body") continue;
                          Response.Write("<li><b>" + attributeValue.Key + "</b>: " + attributeValue.Value + ((attributeValue.Value.Length == 124)? "..." : "") + "</li>");
                          }

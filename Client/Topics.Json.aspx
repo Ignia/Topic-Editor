@@ -1,7 +1,7 @@
 <%@ Page Language="C#" ContentType="application/json" %>
 
 <%@ Import NameSpace="System.Linq" %>
-<%@ Import NameSpace="Ignia.Topics" %>
+<%@ Import NameSpace="Topics=Ignia.Topics" %>
 
 <script runat="server">
 
@@ -469,7 +469,7 @@
   /*----------------------------------------------------------------------------------------------------------------------------
   | Loop through Topic's Attributes and add their values to the list
   \---------------------------------------------------------------------------------------------------------------------------*/
-    foreach (AttributeValue attributeValue in topic.Attributes) {
+    foreach (Topics.AttributeValue attributeValue in topic.Attributes) {
       attributeValues.Add(topic.Attributes.Get(attributeValue.Key));
       }
 
