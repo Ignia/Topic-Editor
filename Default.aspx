@@ -361,7 +361,7 @@
 
     // Provide a warning and confirmation when user chooses to delete a Topic
     function confirmDelete() {
-      return confirm('Are you sure you want to delete the "<%# Topic.Title %>" topic? The topic and all descendants will be permanently deleted.');
+      return confirm('Are you sure you want to delete the "<%# Topic.Title.Replace("'", @"\'") %>" topic? The topic and all descendants will be permanently deleted.');
     }
 
   </script>
