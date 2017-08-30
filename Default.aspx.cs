@@ -697,6 +697,9 @@ public partial class TopicsEditorPage : TopicPage {
     else if (topic.UniqueKey != Request.QueryString["Path"]) {
       Response.Redirect("?Path=" + topic.UniqueKey + "&Action=Saved");
     }
+    else {
+      Response.Redirect(Request.Url.PathAndQuery);
+    }
 
   }
 
