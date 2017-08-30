@@ -51,7 +51,7 @@
 \-----------------------------------------------------------------------------------------------------------------------------*/
   public override String Value {
     get {
-      return Field.Text;
+      return Field.Text.Replace("<p>&nbsp;</p>", "").Replace("<p>&amp;nbsp;</p>", "").Replace("<p></p>", "").Replace("\r\n", "");
       }
     set {
       Field.Text = value;
