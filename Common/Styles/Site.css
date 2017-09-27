@@ -6787,11 +6787,12 @@ select[id*="ThemeColor"] option[selected="selected"][value*="Red"] {
 #DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el.x-tree-node-over .x-tree-node-indent:before {
   color: #ef4a24;
 }
+#DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el a span,
+#Modal_DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el a span,
 #DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el.x-tree-selected a span,
-#DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el.x-tree-node-over a span {
-  color: #333333;
-}
-#DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el a span {
+#DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el.x-tree-node-over a span,
+#Modal_DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el.x-tree-selected a span,
+#Modal_DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el.x-tree-node-over a span {
   color: #333333;
 }
 #DisplayGroupTabsContent .x-tree-root-ct .x-tree-node .x-tree-node-el input[type="checkbox"] {
@@ -6871,15 +6872,16 @@ fieldset[disabled] ul.token-input-list {
   background-color: #cccccc;
   opacity: 1;
 }
-textareaul.token-input-list {
+textarea ul.token-input-list {
   height: auto;
 }
-selectul.token-input-list {
+select ul.token-input-list {
   height: 33px;
   line-height: 33px;
 }
-textareaul.token-input-list,
-select[multiple]ul.token-input-list {
+textarea ul.token-input-list,
+select[multiple],
+ul.token-input-list {
   height: auto;
 }
 ul.token-input-list.token-input-focused {
