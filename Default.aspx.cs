@@ -623,6 +623,13 @@ public partial class TopicsEditorPage : TopicPage {
 
           // Set Treeview control nodes to form field
           if (control is Relationships) {
+
+            // Reset Relationships
+            var relationshipNamespace   = ((Relationships)control).Namespace;
+            if (topic.Relationships.Contains(relationshipNamespace)) {
+              topic.Relationships.Clear();
+            }
+
             List<string> relatedTopics  = control.Value.Split(',').ToList();
             foreach (string topicIdString in relatedTopics) {
               int topicIdInt;
@@ -632,7 +639,7 @@ public partial class TopicsEditorPage : TopicPage {
                 relatedTopic            = TopicRepository.RootTopic.GetTopic(topicIdInt);
               }
               if (relatedTopic != null) {
-                topic.SetRelationship(((Relationships)control).Namespace, relatedTopic);
+                topic.SetRelationship(relationshipNamespace, relatedTopic);
               }
             }
             //topic.SetRelationship(((Relationships)control).Namespace, control.Value);
