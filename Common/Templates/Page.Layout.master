@@ -310,7 +310,8 @@
 
                 </asp:ContentPlaceHolder>
 
-                <asp:Panel Visible=<%# IsTopicPage && Roles.IsUserInRole(Page.User.Identity.Name, "Administrators") %> RunAt="Server">
+                <asp:Panel Visible="false" RunAt="Server">
+                  <!-- IsTopicPage && Roles.IsUserInRole(Page.User.Identity.Name, "Administrators") -->
                   [<a href="<%= EditUrl %>">Edit</a>]
                   <asp:PlaceHolder Visible=<%# Request.QueryString["Debug"] == null %> RunAt="Server">
                     [<a href="?Debug=1">Debug</a>]
