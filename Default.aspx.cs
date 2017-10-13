@@ -74,7 +74,7 @@ public partial class TopicsEditorPage : TopicPage {
   /// </summary>
   public bool DisableDelete {
     get {
-      if (!IsNew && (this.Topic.Attributes.Get("DisableDelete").Equals("1") || this.Topic.Attributes.Get("ContentType", "") == "List")) {
+      if (!IsNew && (this.Topic.Attributes.GetValue("DisableDelete").Equals("1") || this.Topic.Attributes.GetValue("ContentType", "") == "List")) {
         return true;
       }
       else {
@@ -162,8 +162,8 @@ public partial class TopicsEditorPage : TopicPage {
       /*------------------------------------------------------------------------------------------------------------------------
       | Look up existing/current Topic Content Type
       \-----------------------------------------------------------------------------------------------------------------------*/
-      if (!IsNew && this.Topic != null && !String.IsNullOrEmpty(this.Topic.Attributes.Get("ContentType", ""))) {
-        contentType             = this.Topic.Attributes.Get("ContentType");
+      if (!IsNew && this.Topic != null && !String.IsNullOrEmpty(this.Topic.Attributes.GetValue("ContentType", ""))) {
+        contentType             = this.Topic.Attributes.GetValue("ContentType");
       }
 
       /*------------------------------------------------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ public partial class TopicsEditorPage : TopicPage {
         // Set Order
         _contentTypeAttributes  = _contentTypeAttributes
                                   .OrderBy(contentTypeAttribute => contentTypeAttribute.DisplayGroup)
-                                  .ThenBy(contentTypeAttribute => Int32.Parse(contentTypeAttribute.Attributes.Get("SortOrder", "25")))
+                                  .ThenBy(contentTypeAttribute => Int32.Parse(contentTypeAttribute.Attributes.GetValue("SortOrder", "25")))
                                   .ThenBy(contentTypeAttribute => contentTypeAttribute.Title)
                                   .ToList();
       }
@@ -368,7 +368,7 @@ public partial class TopicsEditorPage : TopicPage {
       HyperLink description             = new HyperLink();
 
       string key                        = contentTypeAttribute.Key;
-      string typeName                   = contentTypeAttribute.Attributes.Get("Type", "FormField.ascx");
+      string typeName                   = contentTypeAttribute.Attributes.GetValue("Type", "FormField.ascx");
       string tagName                    = typeName.Substring(0, typeName.LastIndexOf("."));
 
       string defaultConfiguration       = contentTypeAttribute.DefaultConfiguration;
@@ -413,14 +413,14 @@ public partial class TopicsEditorPage : TopicPage {
       // placeholder attribute). It is up to each Attribute control, however, to determine if and how the InheritedValue is
       // rendered.
       // -----------------------------------------------------------------------------------------------------------------------
-      // ### NOTE JJC092213: When calling Attributes.Get(), it is not possible to identify whether the value was inherited or
+      // ### NOTE JJC092213: When calling Attributes.GetValue(), it is not possible to identify whether the value was inherited or
       // not. To mitigate this, the InheritedValue explicitly checks for a Topic Pointer and grabs the inherited value from the
-      // referenced object. Typically, this isn't necessary as Attributes.Get() will automatically fallback to the Topic Pointer
+      // referenced object. Typically, this isn't necessary as Attributes.GetValue() will automatically fallback to the Topic Pointer
       // if it exists.
       string inheritedValue             = null;
 
       if (this.Topic.DerivedTopic != null) {
-        inheritedValue = this.Topic.DerivedTopic.Attributes.Get(key);
+        inheritedValue = this.Topic.DerivedTopic.Attributes.GetValue(key);
       }
 
       /*------------------------------------------------------------------------------------------------------------------------
@@ -450,7 +450,7 @@ public partial class TopicsEditorPage : TopicPage {
           }
         }
         else {
-          control.Value                 = this.Topic.Attributes.Get(key, null, false, false);
+          control.Value                 = this.Topic.Attributes.GetValue(key, null, false, false);
           control.InheritedValue        = inheritedValue;
         }
       }
@@ -521,7 +521,7 @@ public partial class TopicsEditorPage : TopicPage {
   ///   Returns true or false based on whether the Content Type Attribute is available and not empty.
   /// </summary>
   public bool GetAttributeAsBool (Topic topic, string name, bool defaultValue = false) {
-    string value                = topic.Attributes.Get(name);
+    string value                = topic.Attributes.GetValue(name);
     if (String.IsNullOrEmpty(value)) return defaultValue;
     return value.ToLower().Equals("true") || value.Equals("1");
   }
@@ -578,7 +578,7 @@ public partial class TopicsEditorPage : TopicPage {
       closeOnDeleteScript.Append(@"</script>");
       ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "CloseModalOnDelete", closeOnDeleteScript.ToString(), false);
     }
-    else if (topic.Attributes.Get("ContentType", "") == "List") {
+    else if (topic.Attributes.GetValue("ContentType", "") == "List") {
       Response.Redirect("?Path=" + topic.Parent.UniqueKey + "&DeletedTopic=" + deletedTopic + "&DeletedFrom=" + topic.Title + "&Action=Deleted");
     }
     else {
@@ -660,7 +660,7 @@ public partial class TopicsEditorPage : TopicPage {
               topic.Attributes.Add(new AttributeValue(contentTypeAttribute.Key, control.Value));
             }
             else {
-              topic.Attributes.Set(contentTypeAttribute.Key, control.Value);
+              topic.Attributes.SetValue(contentTypeAttribute.Key, control.Value);
             }
           }
         }
@@ -673,7 +673,7 @@ public partial class TopicsEditorPage : TopicPage {
           topic.Attributes.Add(new AttributeValue("ContentType", ContentType.Key));
         }
         else {
-          topic.Attributes.Set("ContentType", ContentType.Key);
+          topic.Attributes.SetValue("ContentType", ContentType.Key);
         }
       }
 

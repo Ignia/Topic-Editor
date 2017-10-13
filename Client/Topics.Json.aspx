@@ -28,7 +28,7 @@
 |               04.01.15        Katherine Trunkey       Added ResultLimit property and associated logic to determine the
 |                                                       maximum number of Topics to return.
 |               04.07.15        Katherine Trunkey       Added filterValue logic to FilterChildren in order to account for
-|                                                       AttributeName values that may not be retrievable via Attributes.Get().
+|                                                       AttributeName values that may not be retrievable via Attributes.GetValue().
 |               04.09.15        Katherine Trunkey       Added HasAttribute() and GetAttribute() methods to centralize Topic
 |                                                       filtering logic.
 |               04.15.15        Katherine Trunkey       Added Query parameter and associated logic to perform a broader search
@@ -360,13 +360,13 @@
       from      t in topic.SortedChildren
       where
         (       ShowAll || (
-                  !t.Attributes.Get("IsDisabled").Equals("1") &&
-                  !t.Attributes.Get("IsHidden").Equals("1") &&
-                  !t.Attributes.Get("IsInactive").Equals("1")
+                  !t.Attributes.GetValue("IsDisabled").Equals("1") &&
+                  !t.Attributes.GetValue("IsHidden").Equals("1") &&
+                  !t.Attributes.GetValue("IsInactive").Equals("1")
                   )
                 ) &&
         (       ShowNestedTopics ||
-                !t.Attributes.Get("ContentType").Equals("List")
+                !t.Attributes.GetValue("ContentType").Equals("List")
                 ) &&
         (       String.IsNullOrEmpty(AttributeName) ||
                 String.IsNullOrEmpty(AttributeValue) ||
@@ -428,7 +428,7 @@
   | Default to GetAttribute(AttributeName)
   \---------------------------------------------------------------------------------------------------------------------------*/
     else {
-      return topic.Attributes.Get(attributeName, "");
+      return topic.Attributes.GetValue(attributeName, "");
       }
 
     }
@@ -470,7 +470,7 @@
   | Loop through Topic's Attributes and add their values to the list
   \---------------------------------------------------------------------------------------------------------------------------*/
     foreach (Topics.AttributeValue attributeValue in topic.Attributes) {
-      attributeValues.Add(topic.Attributes.Get(attributeValue.Key));
+      attributeValues.Add(topic.Attributes.GetValue(attributeValue.Key));
       }
 
   /*----------------------------------------------------------------------------------------------------------------------------
@@ -556,7 +556,7 @@
       + "\"text\":\""           + HttpUtility.HtmlAttributeEncode(UseKeyAsText? topic.Key : topic.Title)            + "\", "
       + "\"path\":\""           + HttpUtility.HtmlAttributeEncode(topic.UniqueKey)                                  + "\", "
       + "\"webPath\":\""        + HttpUtility.HtmlAttributeEncode(topic.WebPath)                                    + "\", "
-      + "\"draggable\":\""      + TopicRepository.ContentTypes.Get(topic.ContentType).Attributes.Get("DisableDelete").Equals("1").ToString().ToLower()  + "\", ";
+      + "\"draggable\":\""      + TopicRepository.ContentTypes.Get(topic.ContentType).Attributes.GetValue("DisableDelete").Equals("1").ToString().ToLower()  + "\", ";
 
     /*--------------------------------------------------------------------------------------------------------------------------
     | Handle relationships

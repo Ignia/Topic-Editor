@@ -105,7 +105,7 @@
   public string ContentType {
     get {
       if (_contentType == null && PageTopic != null) {
-        _contentType = PageTopic.Attributes.Get("ContentType");
+        _contentType = PageTopic.Attributes.GetValue("ContentType");
       }
       return _contentType;
     }
@@ -122,8 +122,8 @@
   /*----------------------------------------------------------------------------------------------------------------------------
   | Check PageTopic for TopicID Attribute - if available, set Value
   \---------------------------------------------------------------------------------------------------------------------------*/
-    if (PageTopic != null && !String.IsNullOrEmpty(PageTopic.Attributes.Get("TopicID"))) {
-      Value                     = PageTopic.Attributes.Get("TopicID");
+    if (PageTopic != null && !String.IsNullOrEmpty(PageTopic.Attributes.GetValue("TopicID"))) {
+      Value                     = PageTopic.Attributes.GetValue("TopicID");
     }
 
   /*----------------------------------------------------------------------------------------------------------------------------
@@ -176,7 +176,7 @@
   | If the Topic is not new, set the TopicID Attribute for the current (Page) Topic; otherwise, create and save a new Topic
   \---------------------------------------------------------------------------------------------------------------------------*/
     if (!IsNew) {
-      PageTopic.Attributes.Set("TopicID", selectedTopicId.ToString());
+      PageTopic.Attributes.SetValue("TopicID", selectedTopicId.ToString());
     }
     else {
 
@@ -191,15 +191,15 @@
 
     //Set Key
       derivedTopic.Key          = selectedTopic.Key;
-      derivedTopic.Attributes.Set("Key", selectedTopic.Key);
+      derivedTopic.Attributes.SetValue("Key", selectedTopic.Key);
 
     //Set ContentType
-      derivedTopic.ContentType  = selectedTopic.Attributes.Get("ContentType");
-      derivedTopic.Attributes.Set("ContentType", selectedTopic.Attributes.Get("ContentType"));
+      derivedTopic.ContentType  = selectedTopic.Attributes.GetValue("ContentType");
+      derivedTopic.Attributes.SetValue("ContentType", selectedTopic.Attributes.GetValue("ContentType"));
 
     //Set Parent
       derivedTopic.Parent       = PageTopic;
-      derivedTopic.Attributes.Set("ParentID", PageTopic.Id.ToString());
+      derivedTopic.Attributes.SetValue("ParentID", PageTopic.Id.ToString());
 
     //Double-check there are no siblings with the same Key; if there are, add time stamp to Key to differentiate
       foreach (Topic topic in derivedTopic.Parent) {

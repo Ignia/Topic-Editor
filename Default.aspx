@@ -195,11 +195,11 @@
             <!-- /Version Rollback -->
 
             <button id="ModalCloseButton" type="button" Visible=<%# Master.IsModal %> class="btn btn-ancillary btn-sm" data-dismiss="modal" ClientIDMode="Static" RunAt="Server">Cancel</button>
-            <asp:PlaceHolder Visible=<%# Topic.Parent.Attributes.Get("ContentType", "").Equals("List") && !Master.IsModal %> RunAt="Server">
+            <asp:PlaceHolder Visible=<%# Topic.Parent.Attributes.GetValue("ContentType", "").Equals("List") && !Master.IsModal %> RunAt="Server">
               <a href="Default.aspx?Path=<%# ((IsNew)? Topic.Parent.UniqueKey : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.UniqueKey : "#")) %>"class="btn btn-ancillary btn-sm">Cancel</a>
             </asp:PlaceHolder>
 
-            <button id="DeletePageButtonTop" Visible=<%# !IsNew %> Disabled=<%# DisableDelete || ContentType.Attributes.Get("DisableDelete").Equals("1") %> class="btn btn-default btn-sm" onclick="if (!confirmDelete()) return false;" onserverclick="DeleteTopic" RunAt="Server">Delete</button>
+            <button id="DeletePageButtonTop" Visible=<%# !IsNew %> Disabled=<%# DisableDelete || ContentType.Attributes.GetValue("DisableDelete").Equals("1") %> class="btn btn-default btn-sm" onclick="if (!confirmDelete()) return false;" onserverclick="DeleteTopic" RunAt="Server">Delete</button>
 
             <asp:Button id="SavePageButtonTop" OnClick="SaveTopic" CssClass="btn btn-primary btn-sm" Text="Save" RunAt="Server" />
 
@@ -244,7 +244,7 @@
           <%= NestedTopicAlert %>
         </asp:Panel>
 
-        <asp:Panel Visible=<%# Topic.Parent.Attributes.Get("ContentType", "").Equals("List") && !Master.IsModal  %> CssClass="alert alert-info" role="alert" RunAt="Server">
+        <asp:Panel Visible=<%# Topic.Parent.Attributes.GetValue("ContentType", "").Equals("List") && !Master.IsModal  %> CssClass="alert alert-info" role="alert" RunAt="Server">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           You are currently editing a Nested Topic of <a href="Default.aspx?Path=<%# ((IsNew)? Topic.Parent.UniqueKey : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.UniqueKey : "#")) %>" class="alert-link"><%# ((IsNew)? Topic.Parent.Title : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.Title : "")) %></a>.
         </asp:Panel>
@@ -283,7 +283,7 @@
               <h3 class="h5">Topic Information</h4>
               <dl>
                 <dt><i class="fa fa-cogs"></i> Content Type</dt>
-                <dd><a href="/!Admin/Topics/Default.aspx?Path=<%# ContentType.UniqueKey %>"><%# Topic.Attributes.Get("ContentType") %></a></dd>
+                <dd><a href="/!Admin/Topics/Default.aspx?Path=<%# ContentType.UniqueKey %>"><%# Topic.Attributes.GetValue("ContentType") %></a></dd>
                 <dt><i class="fa fa-database"></i> Topic ID</dt>
                 <dd><a href="/Topic/<%# Topic.Id %>/"><%# Topic.Id %></a></dd>
                 <dt><i class="fa fa-eye"></i> Current</dt>

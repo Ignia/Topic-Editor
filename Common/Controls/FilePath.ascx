@@ -142,7 +142,7 @@
           _inheritedValue                       = FilePath.GetPath(topic, Attribute.Key, IncludeLeafTopic, topicsToTruncate);
           }
         else if (InheritValue) {
-          _inheritedValue                       = topic.Attributes.Get(Attribute.Key, true);
+          _inheritedValue                       = topic.Attributes.GetValue(Attribute.Key, true);
           }
         else {
           _inheritedValue                       = "";
