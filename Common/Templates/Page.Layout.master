@@ -83,8 +83,8 @@
       if (Page is TopicPage) {
         return ((TopicPage)Page).Topic;
         }
-      else if (TopicRepository.RootTopic.First() != null) {
-        return TopicRepository.RootTopic.GetTopic(TopicRepository.RootTopic.First().Key);
+      else if (TopicRepository.RootTopic.Children.First() != null) {
+        return TopicRepository.RootTopic.GetTopic(TopicRepository.RootTopic.Children.First().Key);
         }
       else {
         return TopicRepository.RootTopic.GetTopic("Web");
@@ -233,7 +233,7 @@
   <body<%# ((IsModal)? " class=\"Modal\"" : "") %>>
     <form name="EditorForm" class="Editor-Form" RunAt="Server">
 
-      <div style="display: none;"><%# ((TopicRepository.RootTopic.First() != null)? TopicRepository.RootTopic.First().Key : "null") %></div>
+      <div style="display: none;"><%# ((TopicRepository.RootTopic.Children.First() != null)? TopicRepository.RootTopic.Children.First().Key : "null") %></div>
       <asp:ContentPlaceHolder ID="HeaderArea" RunAt="Server">
 
         <asp:ContentPlaceHolder ID="HeaderContainer" RunAt="Server">
@@ -255,7 +255,7 @@
                     <!-- Site Description -->
                     <div class="<%# (IsModal? "col-md-12 col-sm-12 Modal" : "col-md-10 col-sm-9") %> Page-Title-Area">
                       <asp:ContentPlaceHolder ID="PageTitleArea" RunAt="Server">
-                        <h2 class="Page-Title"><%# (PageTopic == TopicRepository.RootTopic)? Page.Title : PageTopic.Attributes.Get("Title", PageTopic.Key) %></h2>
+                        <h2 class="Page-Title"><%# (PageTopic == TopicRepository.RootTopic)? Page.Title : PageTopic.Attributes.GetValue("Title", PageTopic.Key) %></h2>
                       </asp:ContentPlaceHolder>
                     </div>
                     <!-- /Site Description -->
