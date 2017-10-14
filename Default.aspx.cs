@@ -217,7 +217,7 @@ public partial class TopicsEditorPage : TopicPage {
       if (ContentType != null) {
 
         // Get Attributes
-        _contentTypeAttributes  = ContentType.SupportedAttributes.Values.ToList();
+        _contentTypeAttributes  = ContentType.SupportedAttributes.ToList();
 
         // Set Order
         _contentTypeAttributes  = _contentTypeAttributes
