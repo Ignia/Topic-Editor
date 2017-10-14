@@ -639,7 +639,7 @@ public partial class TopicsEditorPage : TopicPage {
                 relatedTopic            = TopicRepository.RootTopic.GetTopic(topicIdInt);
               }
               if (relatedTopic != null) {
-                topic.SetRelationship(relationshipNamespace, relatedTopic);
+                topic.Relationships.SetTopic(relationshipNamespace, relatedTopic);
               }
             }
             //topic.SetRelationship(((Relationships)control).Namespace, control.Value);
