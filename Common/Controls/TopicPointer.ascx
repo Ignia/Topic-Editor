@@ -202,7 +202,7 @@
       derivedTopic.Attributes.SetValue("ParentID", PageTopic.Id.ToString());
 
     //Double-check there are no siblings with the same Key; if there are, add time stamp to Key to differentiate
-      foreach (Topic topic in derivedTopic.Parent) {
+      foreach (Topic topic in derivedTopic.Parent.Children) {
         if (derivedTopic.Key == topic.Key) {
           derivedTopic.Key     += "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
         }
