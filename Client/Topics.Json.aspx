@@ -357,7 +357,7 @@
   | Get filtered Topics
   \---------------------------------------------------------------------------------------------------------------------------*/
     var filteredTopics = (
-      from      t in topic.SortedChildren
+      from      t in topic.Children.Sorted
       where
         (       ShowAll || (
                   !t.Attributes.GetValue("IsDisabled").Equals("1") &&
@@ -509,7 +509,7 @@
   /*============================================================================================================================
   | Get "filtered" topic and/or its children based on (flattened) structure setting
   \---------------------------------------------------------------------------------------------------------------------------*/
-    var         filteredTopics  = FlattenStructure? topic : FilterChildren(topic);
+    var         filteredTopics  = FlattenStructure? topic.Children : FilterChildren(topic);
 
   /*============================================================================================================================
   | If the structure is flattened but the Topic should be filtered, check HasAttribute() (if AttributeName and AttributeValue
