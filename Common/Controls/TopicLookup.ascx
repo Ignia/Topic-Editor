@@ -1,6 +1,7 @@
 <%@ Control Language="C#" ClassName="TopicLookup" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
 
 <%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="Ignia.Topics.Collections" %>
 <%@ Import Namespace="System.Web" %>
 <%@ Import Namespace="System.Web.UI" %>
 <%@ Import Namespace="System.Collections.ObjectModel" %>
@@ -58,7 +59,7 @@
   private       bool                            _useUniqueKey           = true;
   private       string                          _valueProperty          = null;
 
-  private       Collection<Topic>               _topics                 = null;
+  private       TopicCollection<Topic>          _topics                 = null;
   private       Dictionary<string, string>      _dataSource             = null;
 
 /*==============================================================================================================================
@@ -225,7 +226,7 @@
 >-------------------------------------------------------------------------------------------------------------------------------
 | Retrieves a collection of topics with optional control call filter properties Scope, AttributeName and AttributeValue.
 \-----------------------------------------------------------------------------------------------------------------------------*/
-  public Collection<Topic> Topics {
+  public TopicCollection<Topic> Topics {
     get {
 
     /*--------------------------------------------------------------------------------------------------------------------------
@@ -236,7 +237,7 @@
     /*--------------------------------------------------------------------------------------------------------------------------
     | INSTANTIATE OBJECTS
     \-------------------------------------------------------------------------------------------------------------------------*/
-      Collection<Topic> topics          = new Collection<Topic>();
+      TopicCollection<Topic> topics     = new TopicCollection<Topic>();
       Topic             topic           = new Topic();
 
       if (Scope != null) {
@@ -252,7 +253,12 @@
     | FILTER TOPICS SELECTION LIST BY ATTRIBUTENAME/ATTRIBUTEVALUE
     \-------------------------------------------------------------------------------------------------------------------------*/
       if (AttributeName != null && AttributeValue != null) {
-        topics                          = topic.FindAllByAttribute(AttributeName, AttributeValue);
+        var readOnlyTopics              = topic.FindAllByAttribute(AttributeName, AttributeValue);
+        foreach (Topic readOnlyTopic in readOnlyTopics) {
+          if (!topics.Contains(readOnlyTopic)) {
+            topics.Add(readOnlyTopic);
+            }
+          }
         }
 
     /*--------------------------------------------------------------------------------------------------------------------------
