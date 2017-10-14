@@ -61,6 +61,7 @@
 
   private       TopicCollection<Topic>          _topics                 = null;
   private       Dictionary<string, string>      _dataSource             = null;
+  private       HashSet<Tuple<string, string>>  _attributeValues        = new HashSet<Tuple<string, string>>();
 
 /*==============================================================================================================================
 | SCOPE
@@ -253,20 +254,27 @@
     | FILTER TOPICS SELECTION LIST BY ATTRIBUTENAME/ATTRIBUTEVALUE
     \-------------------------------------------------------------------------------------------------------------------------*/
       if (AttributeName != null && AttributeValue != null) {
-        var readOnlyTopics              = topic.FindAllByAttribute(AttributeName, AttributeValue);
-        foreach (Topic readOnlyTopic in readOnlyTopics) {
-          if (!topics.Contains(readOnlyTopic)) {
-            topics.Add(readOnlyTopic);
+
+        // Check AttributeName / AttributeValue pair for duplicates before before performing FindAllByAttribute
+        var attributeNameValuePair = Tuple.Create(AttributeName, AttributeValue);
+        if (!_attributeValues.Contains(attributeNameValuePair)) {
+          foreach (Topic readOnlyTopic in topic.FindAllByAttribute(AttributeName, AttributeValue)) {
+            if (!topics.Contains(readOnlyTopic)) {
+              topics.Add(readOnlyTopic);
             }
           }
         }
+
+      }
 
     /*--------------------------------------------------------------------------------------------------------------------------
     | GET ALL TOPICS UNDER ROOTTOPIC
     \-------------------------------------------------------------------------------------------------------------------------*/
       if (topics.Count == 0) {
-        foreach (Topic childTopic in topic) {
-          topics.Add(childTopic);
+        foreach (Topic childTopic in topic.Children) {
+          if (!topics.Contains(childTopic)) {
+            topics.Add(childTopic);
+            }
           }
         }
 
@@ -347,6 +355,16 @@
 | Provide handling for functions that must run prior to page load.  This includes dynamically constructed controls.
 \--------------------------------------------------------------------------------------------------------------------------*/
   void Page_Init(Object Src, EventArgs E) {
+
+  /*----------------------------------------------------------------------------------------------------------------------------
+  | TRACK ATTRIBUTENAME / ATTRIBUTEVALUE PAIRS
+  \---------------------------------------------------------------------------------------------------------------------------*/
+    if (AttributeName != null && AttributeValue != null) {
+      var attributeNameValuePair = Tuple.Create(AttributeName, AttributeValue);
+      if (!_attributeValues.Contains(attributeNameValuePair)) {
+        _attributeValues.Add(attributeNameValuePair);
+      }
+    }
 
   /*----------------------------------------------------------------------------------------------------------------------------
   | BIND CONTROL
