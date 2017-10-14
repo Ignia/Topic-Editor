@@ -556,7 +556,7 @@
       + "\"text\":\""           + HttpUtility.HtmlAttributeEncode(UseKeyAsText? topic.Key : topic.Title)            + "\", "
       + "\"path\":\""           + HttpUtility.HtmlAttributeEncode(topic.UniqueKey)                                  + "\", "
       + "\"webPath\":\""        + HttpUtility.HtmlAttributeEncode(topic.WebPath)                                    + "\", "
-      + "\"draggable\":\""      + TopicRepository.ContentTypes.Get(topic.ContentType).Attributes.GetValue("DisableDelete").Equals("1").ToString().ToLower()  + "\", ";
+      + "\"draggable\":\""      + TopicRepository.ContentTypes[topic.ContentType].Attributes.GetValue("DisableDelete").Equals("1").ToString().ToLower()  + "\", ";
 
     /*--------------------------------------------------------------------------------------------------------------------------
     | Handle relationships
