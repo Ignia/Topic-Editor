@@ -137,7 +137,7 @@
     | ###TODO JJC080314: Provide support for Nested Topic namespacing, by prefixing the key of each TopicList with an
     | undercore.
     \----------------------------------------------------------------------------------------------------------------------*/
-      if (!PageTopic.Contains(Attribute.Key)) {
+      if (!PageTopic.Children.Contains(Attribute.Key)) {
         Topic   topics          = Topic.Create(Attribute.Key, "List");
 
         topics.Parent           = PageTopic;
@@ -148,7 +148,7 @@
     /*-----------------------------------------------------------------------------------------------------------------------
     | LOOKUP CONTEXT
     \----------------------------------------------------------------------------------------------------------------------*/
-      _topics = PageTopic[Attribute.Key];
+      _topics = PageTopic.Children[Attribute.Key];
 
     /*-----------------------------------------------------------------------------------------------------------------------
     | RETURN TOPICS LIST
