@@ -27,7 +27,7 @@ public partial class TopicsEditorPage : TopicPage {
   /*============================================================================================================================
   | PRIVATE FIELDS
   \---------------------------------------------------------------------------------------------------------------------------*/
-  private       ContentType                     _contentType            = null;
+  private       ContentTypeDescriptor           _contentType            = null;
   private       List<Ignia.Topics.Attribute>    _contentTypeAttributes  = null;
 
   /*============================================================================================================================
@@ -146,7 +146,7 @@ public partial class TopicsEditorPage : TopicPage {
   ///   Identifies the ContentType topic based on the QueryString(for new topics) or the ContentType attribute of the current
   ///   this.Topic.
   /// </summary>
-  public ContentType ContentType {
+  public ContentTypeDescriptor ContentType {
     get {
 
       /*------------------------------------------------------------------------------------------------------------------------
