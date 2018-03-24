@@ -477,7 +477,9 @@
         .Replace("{FullName}", topic.UniqueKey)
         .Replace("{Key}", topic.Key)
         .Replace("{UniqueKey}", topic.UniqueKey)
-        .Replace("{Title}", topic.Title);
+        .Replace("{Title}", topic.Title)
+        .Replace("{Parent}", topic.Parent.UniqueKey)
+        .Replace("{ParentId}", topic.Parent.Id);
 
       }
 
