@@ -479,7 +479,9 @@
         .Replace("{UniqueKey}", topic.UniqueKey)
         .Replace("{Title}", topic.Title)
         .Replace("{Parent}", topic.Parent.UniqueKey)
-        .Replace("{ParentId}", topic.Parent.Id);
+        .Replace("{ParentId}", topic.Parent.Id)
+        .Replace("{GrandParent}", topic.Parent?.Parent?.UniqueKey)
+        .Replace("{GrandParentId}", topic.Parent?.Parent?.Id);
 
       }
 
