@@ -269,7 +269,7 @@
         + "\"key\":\""          + HttpUtility.HtmlAttributeEncode(topic.Key)                    + "\", "
         + "\"text\":\""         + HttpUtility.HtmlAttributeEncode(topic.Title)                  + "\", "
         + "\"path\":\""         + HttpUtility.HtmlAttributeEncode(topic.UniqueKey)              + "\", "
-        + "\"webPath\":\""      + HttpUtility.HtmlAttributeEncode(topic.WebPath)                + "\""
+        + "\"webPath\":\""      + HttpUtility.HtmlAttributeEncode(topic.GetWebPath())                + "\""
         + "},";
 
     }

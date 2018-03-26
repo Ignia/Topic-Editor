@@ -198,7 +198,7 @@
     <title>OnTopic Structured Data Editor</title>
 
     <asp:PlaceHolder Visible=<%# IsTopicPage %> RunAt="Server">
-      <link rel="canonical" href="<%# PageTopic.WebPath %>" />
+      <link rel="canonical" href="<%# PageTopic.GetWebPath() %>" />
     </asp:PlaceHolder>
 
     <!-- jQuery -->

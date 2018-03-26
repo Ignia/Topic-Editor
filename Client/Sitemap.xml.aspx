@@ -78,7 +78,7 @@
   | OPEN NODE
   \------------------------------------------------------------------------------------------------------------------------*/
     output += indent + "\n<url>";
-    output += indent + "\n  <loc>" + Server.HtmlEncode("http://www.GoldSim.com" + topic.WebPath) + "</loc>";
+    output += indent + "\n  <loc>" + Server.HtmlEncode("http://www.GoldSim.com" + topic.GetWebPath()) + "</loc>";
     output += indent + "\n  <changefreq>monthly</changefreq>";
     output += indent + "\n  <priority>" + (1.0/indentLevel).ToString() + "</priority>";
     output += indent + "\n  <pagemap>";

@@ -287,7 +287,7 @@
                 <dt><i class="fa fa-database"></i> Topic ID</dt>
                 <dd><a href="/Topic/<%# Topic.Id %>/"><%# Topic.Id %></a></dd>
                 <dt><i class="fa fa-eye"></i> Current</dt>
-                <dd><a href="<%= Topic.WebPath %>">View Page</a></dd>
+                <dd><a href="<%= Topic.GetWebPath() %>">View Page</a></dd>
               </dl>
             </asp:Panel>
             <!-- /Topic Information -->

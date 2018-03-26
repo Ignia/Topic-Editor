@@ -555,7 +555,7 @@
       + "\"key\":\""            + HttpUtility.HtmlAttributeEncode(topic.Key)                                        + "\", "
       + "\"text\":\""           + HttpUtility.HtmlAttributeEncode(UseKeyAsText? topic.Key : topic.Title)            + "\", "
       + "\"path\":\""           + HttpUtility.HtmlAttributeEncode(topic.UniqueKey)                                  + "\", "
-      + "\"webPath\":\""        + HttpUtility.HtmlAttributeEncode(topic.WebPath)                                    + "\", "
+      + "\"webPath\":\""        + HttpUtility.HtmlAttributeEncode(topic.GetWebPath())                                    + "\", "
       + "\"draggable\":\""      + TopicRepository.ContentTypes[topic.ContentType].Attributes.GetValue("DisableDelete").Equals("1").ToString().ToLower()  + "\", ";
 
     /*--------------------------------------------------------------------------------------------------------------------------
