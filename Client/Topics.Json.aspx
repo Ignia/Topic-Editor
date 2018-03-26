@@ -418,7 +418,7 @@
   | Set filter value to Topic property, if available, for non-typical Topic AttributeValues
   \---------------------------------------------------------------------------------------------------------------------------*/
     if (attributeName.Equals("uniquekey", StringComparison.InvariantCultureIgnoreCase)) {
-      return topic.UniqueKey;
+      return topic.GetUniqueKey();
       }
     else if (attributeName.Equals("title", StringComparison.InvariantCultureIgnoreCase)) {
       return topic.Title;
@@ -477,7 +477,7 @@
   | Add Topic property values (for properties not typically or necessarily set to an AttributeValue)
   \---------------------------------------------------------------------------------------------------------------------------*/
   //Add UniqueKey
-    attributeValues.Add(topic.UniqueKey);
+    attributeValues.Add(topic.GetUniqueKey());
   //Add Title
     attributeValues.Add(topic.Title);
 
@@ -554,7 +554,7 @@
       + "\"id\":\""             + topic.Id                                                                          + "\", "
       + "\"key\":\""            + HttpUtility.HtmlAttributeEncode(topic.Key)                                        + "\", "
       + "\"text\":\""           + HttpUtility.HtmlAttributeEncode(UseKeyAsText? topic.Key : topic.Title)            + "\", "
-      + "\"path\":\""           + HttpUtility.HtmlAttributeEncode(topic.UniqueKey)                                  + "\", "
+      + "\"path\":\""           + HttpUtility.HtmlAttributeEncode(topic.GetUniqueKey())                                  + "\", "
       + "\"webPath\":\""        + HttpUtility.HtmlAttributeEncode(topic.GetWebPath())                                    + "\", "
       + "\"draggable\":\""      + TopicRepository.ContentTypes[topic.ContentType].Attributes.GetValue("DisableDelete").Equals("1").ToString().ToLower()  + "\", ";
 

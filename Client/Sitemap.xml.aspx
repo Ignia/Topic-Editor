@@ -66,7 +66,7 @@
   | SKIP DISABLED AND CONFIGURATION
   \------------------------------------------------------------------------------------------------------------------------*/
     if (topic.Attributes.GetValue("IsInactive") == "1" || topic.Attributes.GetValue("IsDisabled") == "1") return "";
-    if (topic.UniqueKey.StartsWith("Root:Configuration")) return "";
+    if (topic.GetUniqueKey().StartsWith("Root:Configuration")) return "";
 
   /*=========================================================================================================================
   | ESTABLISH INDENT
@@ -100,7 +100,7 @@
     foreach (Topic relationship in topic.Relationships) {
       output += indent + "\n    <DataObject type=\"" + relationship.Key + "\">";
       foreach (Topic relatedTopic in topic.Relationships[relationship.Key]) {
-        output += indent + "\n      <Attribute name=\"TopicKey\">" + relatedTopic.UniqueKey.Replace("Root:", "") + "</Attribute>";
+        output += indent + "\n      <Attribute name=\"TopicKey\">" + relatedTopic.GetUniqueKey().Replace("Root:", "") + "</Attribute>";
         }
       output += indent + "\n    </DataObject>";
       }

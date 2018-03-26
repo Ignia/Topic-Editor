@@ -268,7 +268,7 @@
         + "\"id\":\""           + topic.Id                                                      + "\", "
         + "\"key\":\""          + HttpUtility.HtmlAttributeEncode(topic.Key)                    + "\", "
         + "\"text\":\""         + HttpUtility.HtmlAttributeEncode(topic.Title)                  + "\", "
-        + "\"path\":\""         + HttpUtility.HtmlAttributeEncode(topic.UniqueKey)              + "\", "
+        + "\"path\":\""         + HttpUtility.HtmlAttributeEncode(topic.GetUniqueKey())              + "\", "
         + "\"webPath\":\""      + HttpUtility.HtmlAttributeEncode(topic.GetWebPath())                + "\""
         + "},";
 

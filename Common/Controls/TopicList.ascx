@@ -210,7 +210,7 @@
       containerScroll           : true,
       border                    : false,
       baseCls                   : 'TreeView',
-      dataUrl                   : 'Client/Topics.Json.aspx?Scope=<%# PageTopic.UniqueKey + ":" + Attribute.Key %>&ShowAll=true',
+      dataUrl                   : 'Client/Topics.Json.aspx?Scope=<%# PageTopic.GetUniqueKey() + ":" + Attribute.Key %>&ShowAll=true',
       root                      : new Ext.tree.AsyncTreeNode({}),
       rootVisible               : false,
       listeners                 : {
@@ -274,7 +274,7 @@
     AllowedKeys         = <%# ContentTypes %>
     Label               = "Add child Topic..."
     ValueProperty       = "Title"
-    TargetUrl           = <%# "Default.aspx?ContentType={Topic}&Path=" + PageTopic.UniqueKey + ":" + Attribute.Key + "&Action=Add" %>
+    TargetUrl           = <%# "Default.aspx?ContentType={Topic}&Path=" + PageTopic.GetUniqueKey() + ":" + Attribute.Key + "&Action=Add" %>
     TargetPopup         = <%# TargetPopup %>
     OnClientClose       = <%# TreePanelIdentifier + "_refresh" %>
     Visible             = <%# !IsNew %>

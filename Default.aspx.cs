@@ -107,7 +107,7 @@ public partial class TopicsEditorPage : TopicPage {
             Topic savedTopic    = TopicRepository.DataProvider.Load(savedTopicId);
             if (savedTopic != null) {
               alertContents     = "<em>" + savedTopic.Parent.Title
-                                + ": <a href=\"Default.aspx?Path=" + savedTopic.UniqueKey + "\" class=\"alert-link\">"
+                                + ": <a href=\"Default.aspx?Path=" + savedTopic.GetUniqueKey() + "\" class=\"alert-link\">"
                                 + savedTopic.Title
                                 + "</a></em> has been saved.";
             }
@@ -547,7 +547,7 @@ public partial class TopicsEditorPage : TopicPage {
     | Repopulate dropdown
     \-------------------------------------------------------------------------------------------------------------------------*/
     BindVersionsList();
-    Response.Redirect("?Path=" + this.Topic.UniqueKey);
+    Response.Redirect("?Path=" + this.Topic.GetUniqueKey());
 
   }
 
@@ -579,10 +579,10 @@ public partial class TopicsEditorPage : TopicPage {
       ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "CloseModalOnDelete", closeOnDeleteScript.ToString(), false);
     }
     else if (topic.Attributes.GetValue("ContentType", "") == "List") {
-      Response.Redirect("?Path=" + topic.Parent.UniqueKey + "&DeletedTopic=" + deletedTopic + "&DeletedFrom=" + topic.Title + "&Action=Deleted");
+      Response.Redirect("?Path=" + topic.Parent.GetUniqueKey() + "&DeletedTopic=" + deletedTopic + "&DeletedFrom=" + topic.Title + "&Action=Deleted");
     }
     else {
-      Response.Redirect("?Path=" + topic.UniqueKey);
+      Response.Redirect("?Path=" + topic.GetUniqueKey());
     }
 
   }
@@ -696,13 +696,13 @@ public partial class TopicsEditorPage : TopicPage {
     if (IsModal) {
       StringBuilder closeOnSaveScript   = new StringBuilder();
       closeOnSaveScript.Append(@"<script>");
-      closeOnSaveScript.Append("   console.log('Saved: " + topic.UniqueKey + "');");
+      closeOnSaveScript.Append("   console.log('Saved: " + topic.GetUniqueKey() + "');");
       closeOnSaveScript.Append("   window.parent.closeModal()");
       closeOnSaveScript.Append(@"</script>");
       ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "CloseModalOnSave", closeOnSaveScript.ToString(), false);
     }
-    else if (topic.UniqueKey != Request.QueryString["Path"]) {
-      Response.Redirect("?Path=" + topic.UniqueKey + "&Action=Saved");
+    else if (topic.GetUniqueKey() != Request.QueryString["Path"]) {
+      Response.Redirect("?Path=" + topic.GetUniqueKey() + "&Action=Saved");
     }
     else {
       Response.Redirect(Request.Url.PathAndQuery);

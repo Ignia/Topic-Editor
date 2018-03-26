@@ -213,7 +213,7 @@
 
     //Close modal
       StringBuilder     closeModalScript = new StringBuilder();
-      closeModalScript.Append("console.log('Saved derived Topic: " + PageTopic.UniqueKey + "');");
+      closeModalScript.Append("console.log('Saved derived Topic: " + PageTopic.GetUniqueKey() + "');");
       closeModalScript.Append("window.parent.closeModal()");
       ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "CloseDerivedTopicOnSave", closeModalScript.ToString(), true);
 

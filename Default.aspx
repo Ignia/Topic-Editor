@@ -20,7 +20,7 @@
       Ext.onReady(function(){
         var Tree = Ext.tree;
 
-        var currentTopic = "<%= Topic.UniqueKey %>";
+        var currentTopic = "<%= Topic.GetUniqueKey() %>";
         var currentPosition = currentTopic.indexOf(":", 5);
 
       //track what nodes are moved
@@ -142,7 +142,7 @@
       Topics            = <%# ContentType.Relationships.Contains("ContentTypes")? ContentType.Relationships["ContentTypes"] : null %>
       AttributeName     = "ContentType"
       AttributeValue    = "ContentType"
-      TargetUrl         = <%# "Default.aspx?ContentType={Topic}&Path=" + Topic.UniqueKey + "&Action=Add" %>
+      TargetUrl         = <%# "Default.aspx?ContentType={Topic}&Path=" + Topic.GetUniqueKey() + "&Action=Add" %>
       RunAt             = "Server"
       />
   </asp:Panel>
@@ -196,7 +196,7 @@
 
             <button id="ModalCloseButton" type="button" Visible=<%# Master.IsModal %> class="btn btn-ancillary btn-sm" data-dismiss="modal" ClientIDMode="Static" RunAt="Server">Cancel</button>
             <asp:PlaceHolder Visible=<%# Topic.Parent.Attributes.GetValue("ContentType", "").Equals("List") && !Master.IsModal %> RunAt="Server">
-              <a href="Default.aspx?Path=<%# ((IsNew)? Topic.Parent.UniqueKey : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.UniqueKey : "#")) %>"class="btn btn-ancillary btn-sm">Cancel</a>
+              <a href="Default.aspx?Path=<%# ((IsNew)? Topic.Parent.GetUniqueKey() : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.GetUniqueKey() : "#")) %>"class="btn btn-ancillary btn-sm">Cancel</a>
             </asp:PlaceHolder>
 
             <button id="DeletePageButtonTop" Visible=<%# !IsNew %> Disabled=<%# DisableDelete || ContentType.Attributes.GetValue("DisableDelete").Equals("1") %> class="btn btn-default btn-sm" onclick="if (!confirmDelete()) return false;" onserverclick="DeleteTopic" RunAt="Server">Delete</button>
@@ -236,7 +236,7 @@
         <asp:Panel Visible=<%# Topic.DerivedTopic != null %> CssClass="alert alert-info alert-dismissable Derived-Topic" RunAt="Server">
           <!-- Inherited Topic Note -->
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          This Topic inherits values from the Topic "<%# Topic.DerivedTopic != null? "<a class=\"alert-link\" href=\"/!Admin/Topics/Default.aspx?Path=" + Topic.DerivedTopic.UniqueKey + "\" target=\"_blank\" data-toggle=\"tooltip\" title=\"" + Topic.DerivedTopic.UniqueKey.Replace(":",": ") + "\">" + Topic.DerivedTopic.Key + "</a>" : "<i>Unavailable</i>" %>".
+          This Topic inherits values from the Topic "<%# Topic.DerivedTopic != null? "<a class=\"alert-link\" href=\"/!Admin/Topics/Default.aspx?Path=" + Topic.DerivedTopic.GetUniqueKey() + "\" target=\"_blank\" data-toggle=\"tooltip\" title=\"" + Topic.DerivedTopic.GetUniqueKey().Replace(":",": ") + "\">" + Topic.DerivedTopic.Key + "</a>" : "<i>Unavailable</i>" %>".
         </asp:Panel>
 
         <asp:Panel Visible=<%# !String.IsNullOrEmpty(NestedTopicAlert) %> CssClass="alert alert-info" role="alert" RunAt="Server">
@@ -246,7 +246,7 @@
 
         <asp:Panel Visible=<%# Topic.Parent.Attributes.GetValue("ContentType", "").Equals("List") && !Master.IsModal  %> CssClass="alert alert-info" role="alert" RunAt="Server">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          You are currently editing a Nested Topic of <a href="Default.aspx?Path=<%# ((IsNew)? Topic.Parent.UniqueKey : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.UniqueKey : "#")) %>" class="alert-link"><%# ((IsNew)? Topic.Parent.Title : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.Title : "")) %></a>.
+          You are currently editing a Nested Topic of <a href="Default.aspx?Path=<%# ((IsNew)? Topic.Parent.GetUniqueKey() : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.GetUniqueKey() : "#")) %>" class="alert-link"><%# ((IsNew)? Topic.Parent.Title : ((Topic.Parent.Parent != null)? Topic.Parent.Parent.Title : "")) %></a>.
         </asp:Panel>
 
         <asp:Panel Visible=<%# DisableDelete %> CssClass="alert alert-warning" role="alert" RunAt="Server">
@@ -283,7 +283,7 @@
               <h3 class="h5">Topic Information</h4>
               <dl>
                 <dt><i class="fa fa-cogs"></i> Content Type</dt>
-                <dd><a href="/!Admin/Topics/Default.aspx?Path=<%# ContentType.UniqueKey %>"><%# Topic.Attributes.GetValue("ContentType") %></a></dd>
+                <dd><a href="/!Admin/Topics/Default.aspx?Path=<%# ContentType.GetUniqueKey() %>"><%# Topic.Attributes.GetValue("ContentType") %></a></dd>
                 <dt><i class="fa fa-database"></i> Topic ID</dt>
                 <dd><a href="/Topic/<%# Topic.Id %>/"><%# Topic.Id %></a></dd>
                 <dt><i class="fa fa-eye"></i> Current</dt>
