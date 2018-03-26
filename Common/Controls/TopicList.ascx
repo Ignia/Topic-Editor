@@ -138,7 +138,7 @@
     | undercore.
     \----------------------------------------------------------------------------------------------------------------------*/
       if (!PageTopic.Children.Contains(Attribute.Key)) {
-        Topic   topics          = Topic.Create(Attribute.Key, "List");
+        Topic   topics          = TopicFactory.Create(Attribute.Key, "List");
 
         topics.Parent           = PageTopic;
         TopicRepository.DataProvider.Save(topics);
