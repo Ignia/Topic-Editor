@@ -217,7 +217,7 @@ public partial class TopicsEditorPage : TopicPage {
       if (ContentType != null) {
 
         // Get Attributes
-        _contentTypeAttributes  = ContentType.AttributeDescriptors.ToList();
+        _contentTypeAttributes  = ContentType.AttributeDescriptors.Cast<Ignia.Topics.Attribute>().ToList();
 
         // Set Order
         _contentTypeAttributes  = _contentTypeAttributes
