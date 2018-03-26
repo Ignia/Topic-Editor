@@ -77,7 +77,7 @@
   public Topic RootTopic {
     get {
       if (_rootTopic == null) {
-        _rootTopic = TopicRepository.RootTopic.GetTopic(Scope)?? new Topic();
+        _rootTopic = TopicRepository.DataProvider.Load(Scope)?? new Topic();
         }
       return _rootTopic;
       }
@@ -97,7 +97,7 @@
         bool    loadRelated     = Int32.TryParse(Request.QueryString["RelatedTopicID"], out relatedTopicId);
 
         if (loadRelated) {
-          _relatedTopic = TopicRepository.RootTopic.GetTopic(relatedTopicId);
+          _relatedTopic = TopicRepository.DataProvider.Load(relatedTopicId);
           if (_relatedTopic == null) {
             throw new ArgumentException("Failed to load Topic Id " + relatedTopicId.ToString() + " from cached repository");
             }

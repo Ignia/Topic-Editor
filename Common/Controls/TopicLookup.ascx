@@ -242,7 +242,7 @@
       Topic             topic           = new Topic();
 
       if (Scope != null) {
-        topic                           = TopicRepository.RootTopic.GetTopic(Scope);
+        topic                           = TopicRepository.DataProvider.Load(Scope);
         }
 
     //Use RootTopic if Scope is available but does not return a topic object
@@ -443,7 +443,7 @@
   /*----------------------------------------------------------------------------------------------------------------------------
   | GET SELECTED TOPIC
   \---------------------------------------------------------------------------------------------------------------------------*/
-    Topic               targetTopic     = TopicRepository.RootTopic.GetTopic(((Scope!= null)? Scope + ":" : "") + TopicSelection.SelectedValue);
+    Topic               targetTopic     = TopicRepository.DataProvider.Load(((Scope!= null)? Scope + ":" : "") + TopicSelection.SelectedValue);
 
   /*----------------------------------------------------------------------------------------------------------------------------
   | PERFORM REDIRECT

@@ -257,7 +257,7 @@
   | INTERNAL VARIABLES
   \---------------------------------------------------------------------------------------------------------------------------*/
     string      topicJson       = "";
-    Topic       topic           = TopicRepository.RootTopic.GetTopic(Int32.Parse(topicId));
+    Topic       topic           = TopicRepository.DataProvider.Load(Int32.Parse(topicId));
 
   /*----------------------------------------------------------------------------------------------------------------------------
   | WRITE OUT JSON OBJECT FOR TOPIC IF TOPIC IS AVAILABLE

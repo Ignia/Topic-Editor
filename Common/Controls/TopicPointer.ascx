@@ -181,7 +181,7 @@
     else {
 
     //Get selected Topic from the Topic Repository
-      Topic     selectedTopic   = TopicRepository.RootTopic.GetTopic(selectedTopicId);
+      Topic     selectedTopic   = TopicRepository.DataProvider.Load(selectedTopicId);
 
     //Create new/temporary Topic
       Topic     derivedTopic    = new Topic();

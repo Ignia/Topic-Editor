@@ -104,7 +104,7 @@ public partial class TopicsEditorPage : TopicPage {
         if (action.Equals("saved") && Request.QueryString["TopicID"] != null) {
           int savedTopicId;
           if (Int32.TryParse(Request.QueryString["TopicID"].ToString(), out savedTopicId)) {
-            Topic savedTopic    = TopicRepository.RootTopic.GetTopic(savedTopicId);
+            Topic savedTopic    = TopicRepository.DataProvider.Load(savedTopicId);
             if (savedTopic != null) {
               alertContents     = "<em>" + savedTopic.Parent.Title
                                 + ": <a href=\"Default.aspx?Path=" + savedTopic.UniqueKey + "\" class=\"alert-link\">"
@@ -636,7 +636,7 @@ public partial class TopicsEditorPage : TopicPage {
               Topic relatedTopic        = null;
               bool isTopicId            = Int32.TryParse(topicIdString, out topicIdInt);
               if (isTopicId && topicIdInt > 0) {
-                relatedTopic            = TopicRepository.RootTopic.GetTopic(topicIdInt);
+                relatedTopic            = TopicRepository.DataProvider.Load(topicIdInt);
               }
               if (relatedTopic != null) {
                 topic.Relationships.SetTopic(relationshipNamespace, relatedTopic);
@@ -768,8 +768,8 @@ public partial class TopicsEditorPage : TopicPage {
     /*--------------------------------------------------------------------------------------------------------------------------
     | Retrieve the source and destination topics
     \-------------------------------------------------------------------------------------------------------------------------*/
-    Topic topic                 = TopicRepository.RootTopic.GetTopic(topicId);
-    Topic target                = TopicRepository.RootTopic.GetTopic(targetTopicId);
+    Topic topic                 = TopicRepository.DataProvider.Load(topicId);
+    Topic target                = TopicRepository.DataProvider.Load(targetTopicId);
 
     /*--------------------------------------------------------------------------------------------------------------------------
     | Reset the source topic's Parent
@@ -781,7 +781,7 @@ public partial class TopicsEditorPage : TopicPage {
     \-------------------------------------------------------------------------------------------------------------------------*/
     lock (TopicRepository.RootTopic) {
       if (siblingId > 0) {
-        Topic sibling           = TopicRepository.RootTopic.GetTopic(siblingId);
+        Topic sibling           = TopicRepository.DataProvider.Load(siblingId);
         TopicRepository.DataProvider.Move(topic, target, sibling);
       }
       else {
