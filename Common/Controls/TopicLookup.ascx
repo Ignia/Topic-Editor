@@ -1,7 +1,8 @@
 <%@ Control Language="C#" ClassName="TopicLookup" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="Topics=Ignia.Topics" %>
 <%@ Import Namespace="Ignia.Topics.Collections" %>
+<%@ Import Namespace="Ignia.Topics.Querying" %>
 <%@ Import Namespace="System.Web" %>
 <%@ Import Namespace="System.Web.UI" %>
 <%@ Import Namespace="System.Collections.ObjectModel" %>
@@ -59,8 +60,8 @@
   private       bool                            _useUniqueKey           = true;
   private       string                          _valueProperty          = null;
 
-  private       TopicCollection<Topic>          _topics                 = null;
-  private       TopicCollection<Topic>          _contentTypes           = new TopicCollection<Topic>();
+  private       TopicCollection<Topics.Topic>   _topics                 = null;
+  private       TopicCollection<Topics.Topic>   _contentTypes           = new TopicCollection<Topics.Topic>();
   private       Dictionary<string, string>      _dataSource             = null;
 
 /*==============================================================================================================================
@@ -227,7 +228,7 @@
 >-------------------------------------------------------------------------------------------------------------------------------
 | Retrieves a collection of topics with optional control call filter properties Scope, AttributeName and AttributeValue.
 \-----------------------------------------------------------------------------------------------------------------------------*/
-  public TopicCollection<Topic> Topics {
+  public TopicCollection<Topics.Topic> Topics {
     get {
 
     /*--------------------------------------------------------------------------------------------------------------------------
@@ -238,8 +239,8 @@
     /*--------------------------------------------------------------------------------------------------------------------------
     | INSTANTIATE OBJECTS
     \-------------------------------------------------------------------------------------------------------------------------*/
-      TopicCollection<Topic> topics     = new TopicCollection<Topic>();
-      Topic             topic           = new Topic();
+      TopicCollection<Topics.Topic> topics      = new TopicCollection<Topics.Topic>();
+      Topics.Topic topic                        = new Topics.Topic();
 
       if (Scope != null) {
         topic                           = TopicRepository.DataProvider.Load(Scope);
@@ -270,7 +271,7 @@
         // Filter for other AttributeName / AttributeValue pairs
         else {
           var readOnlyTopics = topic.FindAllByAttribute(AttributeName, AttributeValue);
-          foreach (Topic readOnlyTopic in readOnlyTopics) {
+          foreach (Topics.Topic readOnlyTopic in readOnlyTopics) {
             if (!topics.Contains(readOnlyTopic.Key)) {
               topics.Add(readOnlyTopic);
             }
@@ -283,7 +284,7 @@
     | GET ALL TOPICS UNDER ROOTTOPIC
     \-------------------------------------------------------------------------------------------------------------------------*/
       if (topics.Count == 0) {
-        foreach (Topic childTopic in topic.Children) {
+        foreach (Topics.Topic childTopic in topic.Children) {
           if (!topics.Contains(childTopic)) {
             topics.Add(childTopic);
             }
@@ -297,7 +298,7 @@
       if (!String.IsNullOrEmpty(AllowedKeys)) {
         allowedKeys                     = AllowedKeys.Split(',');
         for (int i=0; i < topics.Count; i++) {
-          Topic         childTopic      = topics[i];
+          Topics.Topic childTopic       = topics[i];
           if (Array.IndexOf(allowedKeys, childTopic.Key) < 0) {
             topics.RemoveAt(i);
             i--;
@@ -332,7 +333,7 @@
     /*--------------------------------------------------------------------------------------------------------------------------
     | ADD TOPIC KEY AND URL VALUE IF NOT ALREADY IN THE DICTIONARY
     \-------------------------------------------------------------------------------------------------------------------------*/
-      foreach (Topic topic in Topics) {
+      foreach (Topics.Topic topic in Topics) {
         if (!dataSource.Keys.Contains(topic.Key)) {
           string        key                     = topic.Title;
           string        value                   = "";
@@ -443,7 +444,7 @@
   /*----------------------------------------------------------------------------------------------------------------------------
   | GET SELECTED TOPIC
   \---------------------------------------------------------------------------------------------------------------------------*/
-    Topic               targetTopic     = TopicRepository.DataProvider.Load(((Scope!= null)? Scope + ":" : "") + TopicSelection.SelectedValue);
+    Topics.Topic targetTopic    = TopicRepository.DataProvider.Load(((Scope!= null)? Scope + ":" : "") + TopicSelection.SelectedValue);
 
   /*----------------------------------------------------------------------------------------------------------------------------
   | PERFORM REDIRECT
@@ -463,7 +464,7 @@
     return ReplaceTokens(Topics.Where(topic => topic.Key.Equals(topicKey)).FirstOrDefault(), "");
     }
 
-  private string ReplaceTokens(Topic topic, string source, string defaultValue = null) {
+  private string ReplaceTokens(Topics.Topic topic, string source, string defaultValue = null) {
 
     string      replacementToken        = (!String.IsNullOrEmpty(source)? source : (!String.IsNullOrEmpty(TargetUrl)? TargetUrl : ValueProperty));
     string      replacementValue        = "";
@@ -494,7 +495,7 @@
 | Retrieves the Topic's Title property given the provided Topic Key string.
 \-----------------------------------------------------------------------------------------------------------------------------*/
   private String GetTopicTitle(string topicKey) {
-    Topic selectedTopic                 = Topics.Where(topic => topic.Title.Equals(topicKey)).FirstOrDefault();
+    Topics.Topic selectedTopic          = Topics.Where(topic => topic.Title.Equals(topicKey)).FirstOrDefault();
     return (selectedTopic != null? selectedTopic.Title : "");
     }
 
