@@ -475,14 +475,14 @@
         .Replace("{Topic}", topic.Key)
         .Replace("{TopicId}", topic.Id.ToString())
         .Replace("{Name}", topic.Key)
-        .Replace("{FullName}", topic.UniqueKey)
+        .Replace("{FullName}", topic.GetUniqueKey())
         .Replace("{Key}", topic.Key)
-        .Replace("{UniqueKey}", topic.UniqueKey)
+        .Replace("{UniqueKey}", topic.GetUniqueKey())
         .Replace("{Title}", topic.Title)
-        .Replace("{Parent}", topic.Parent.UniqueKey)
-        .Replace("{ParentId}", topic.Parent.Id)
-        .Replace("{GrandParent}", topic.Parent?.Parent?.UniqueKey)
-        .Replace("{GrandParentId}", topic.Parent?.Parent?.Id);
+        .Replace("{Parent}", topic.Parent.GetUniqueKey())
+        .Replace("{ParentId}", topic.Parent.Id.ToString())
+        .Replace("{GrandParent}", topic.Parent?.Parent?.GetUniqueKey())
+        .Replace("{GrandParentId}", topic.Parent?.Parent?.Id.ToString());
 
       }
 
