@@ -162,8 +162,8 @@ public partial class TopicsEditorPage : TopicPage {
       /*------------------------------------------------------------------------------------------------------------------------
       | Look up existing/current Topic Content Type
       \-----------------------------------------------------------------------------------------------------------------------*/
-      if (!IsNew && this.Topic != null && !String.IsNullOrEmpty(this.Topic.Attributes.GetValue("ContentType", ""))) {
-        contentType             = this.Topic.Attributes.GetValue("ContentType");
+      if (!IsNew && this.Topic != null && !String.IsNullOrEmpty(this.Topic.ContentType)) {
+        contentType             = this.Topic.ContentType;
       }
 
       /*------------------------------------------------------------------------------------------------------------------------
