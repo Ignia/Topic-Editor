@@ -125,7 +125,7 @@
     | If the page topic is new, there is no context to create a Nested Topics List container. In that scenario, we should
     | simply return a stub.
     \----------------------------------------------------------------------------------------------------------------------*/
-      if (IsNew) return new Topic();
+      if (IsNew) return new Topic("Empty", "Container", null);
 
     /*-----------------------------------------------------------------------------------------------------------------------
     | VERIFY CONTEXT EXISTS

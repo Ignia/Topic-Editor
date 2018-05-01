@@ -240,7 +240,7 @@
     | INSTANTIATE OBJECTS
     \-------------------------------------------------------------------------------------------------------------------------*/
       TopicCollection<Topics.Topic> topics      = new TopicCollection<Topics.Topic>();
-      Topics.Topic topic                        = new Topics.Topic();
+      Topics.Topic topic                        = null;
 
       if (Scope != null) {
         topic                           = TopicRepository.DataProvider.Load(Scope);

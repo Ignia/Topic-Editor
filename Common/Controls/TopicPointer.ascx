@@ -184,7 +184,7 @@
       Topic     selectedTopic   = TopicRepository.DataProvider.Load(selectedTopicId);
 
     //Create new/temporary Topic
-      Topic     derivedTopic    = new Topic();
+      Topic     derivedTopic    = TopicFactory.Create("Empty", "Container");
 
     //Set (topic pointer) derivation
       derivedTopic.DerivedTopic = selectedTopic;
