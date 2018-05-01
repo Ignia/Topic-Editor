@@ -16,6 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Ignia.Topics;
+using Ignia.Topics.Collections;
 using Ignia.Topics.Web.Editor;
 using Ignia.Topics.Web;
 
@@ -28,7 +29,7 @@ public partial class TopicsEditorPage : TopicPage {
   | PRIVATE FIELDS
   \---------------------------------------------------------------------------------------------------------------------------*/
   private       ContentTypeDescriptor           _contentType            = null;
-  private       List<Ignia.Topics.Attribute>    _contentTypeAttributes  = null;
+  private       List<Ignia.Topics.AttributeDescriptor>    _contentTypeAttributes  = null;
 
   /*============================================================================================================================
   | PUBLIC PROPERTIES
@@ -201,7 +202,7 @@ public partial class TopicsEditorPage : TopicPage {
   ///   Automatically crawls up the ContentType hierarchy to add any Attributes inherited from parent ContentTypes; this
   ///   allows ContentTypes to be nested, thus deriving properties from their parents.
   /// </remarks>
-  public List<Ignia.Topics.Attribute> ContentTypeAttributes {
+  public List<Ignia.Topics.AttributeDescriptor> ContentTypeAttributes {
     get {
 
       /*------------------------------------------------------------------------------------------------------------------------
@@ -212,12 +213,12 @@ public partial class TopicsEditorPage : TopicPage {
       /*------------------------------------------------------------------------------------------------------------------------
       | Look up Content Type Topic Attributes
       \-----------------------------------------------------------------------------------------------------------------------*/
-      _contentTypeAttributes    = new List<Ignia.Topics.Attribute>();
+      _contentTypeAttributes    = new List<Ignia.Topics.AttributeDescriptor>();
 
       if (ContentType != null) {
 
         // Get Attributes
-        _contentTypeAttributes  = ContentType.AttributeDescriptors.Cast<Ignia.Topics.Attribute>().ToList();
+        _contentTypeAttributes  = ContentType.AttributeDescriptors.ToList();
 
         // Set Order
         _contentTypeAttributes  = _contentTypeAttributes
@@ -320,7 +321,7 @@ public partial class TopicsEditorPage : TopicPage {
     // Attributes are drawn based on the defined ContentType's Attributes, as opposed to the Attributes found in the current
     // Topic. As a result, any "ad hoc" attributes added programmatically or orphaned from a previous ContentType setting will
     // not be displayed.
-    foreach (Ignia.Topics.Attribute contentTypeAttribute in ContentTypeAttributes) {
+    foreach (Ignia.Topics.AttributeDescriptor contentTypeAttribute in ContentTypeAttributes) {
 
       /*------------------------------------------------------------------------------------------------------------------------
       | Ignore hidden Attributes
@@ -599,7 +600,10 @@ public partial class TopicsEditorPage : TopicPage {
     | Determine Topic
     \-------------------------------------------------------------------------------------------------------------------------*/
     Topic topic                 = this.Topic;
-    if (IsNew) topic            = new Topic();
+    if (IsNew) {
+      string contentType        = Request.QueryString["ContentType"] ?? "Container";
+      topic                     = TopicFactory.Create("Empty", contentType);
+    }
 
     /*--------------------------------------------------------------------------------------------------------------------------
     | Look up and validate the associated Attribute; lock Topic repository prior to execution
