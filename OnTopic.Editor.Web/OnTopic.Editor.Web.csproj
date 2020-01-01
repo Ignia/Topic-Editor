@@ -50,8 +50,8 @@
     <Reference Include="OnTopic, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OnTopic.4.0.0\lib\netstandard2.0\OnTopic.dll</HintPath>
     </Reference>
-    <Reference Include="OnTopic.Web, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OnTopic.Web.4.0.0-alpha.2\lib\net48\OnTopic.Web.dll</HintPath>
+    <Reference Include="OnTopic.Web, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OnTopic.Web.4.0.1\lib\net48\OnTopic.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -982,7 +982,6 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Compile Include="Infrastructure\WebFormsTopicLookupService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

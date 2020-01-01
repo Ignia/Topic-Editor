@@ -36,7 +36,7 @@ namespace OnTopic.Editor.Web.Host {
       | strongly typed class, which is necessary to provide access to members which parse and query the DefaultConfiguration
       | property.
       \-----------------------------------------------------------------------------------------------------------------------*/
-      TopicFactory.TypeLookupService = new OnTopic.Editor.Web.WebFormsTopicLookupService();
+      TopicFactory.TypeLookupService = new WebFormsTopicLookupService();
 
       /*------------------------------------------------------------------------------------------------------------------------
       | CONFIGURE REPOSITORY

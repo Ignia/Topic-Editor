@@ -53,8 +53,8 @@
     <Reference Include="OnTopic.Data.Sql, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OnTopic.Data.Sql.4.0.0\lib\netstandard2.0\OnTopic.Data.Sql.dll</HintPath>
     </Reference>
-    <Reference Include="OnTopic.Web, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OnTopic.Web.4.0.0-alpha.2\lib\net48\OnTopic.Web.dll</HintPath>
+    <Reference Include="OnTopic.Web, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OnTopic.Web.4.0.1\lib\net48\OnTopic.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SqlClient, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.7.0\lib\net461\System.Data.SqlClient.dll</HintPath>
