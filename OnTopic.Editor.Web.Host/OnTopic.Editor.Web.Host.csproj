@@ -150,9 +150,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OnTopic.Web\OnTopic.Web.csproj">
-      <Project>{c98f7b48-a085-4394-b820-c244f23868ce}</Project>
-      <Name>OnTopic.Web</Name>
+    <ProjectReference Include="..\OnTopic.Editor.Web\OnTopic.Editor.Web.csproj">
+      <Project>{ed551277-df8a-4027-863f-7f8f72ca678c}</Project>
+      <Name>OnTopic.Editor.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

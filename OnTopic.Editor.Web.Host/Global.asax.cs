@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Web.Routing;
 using OnTopic.Data.Caching;
 using OnTopic.Data.Sql;
+using OnTopic.Web;
 
 namespace OnTopic.Editor.Web.Host {
 
@@ -27,6 +28,15 @@ namespace OnTopic.Editor.Web.Host {
     \-------------------------------------------------------------------------------------------------------------------------*/
     [Obsolete]
     protected void Application_Start(object sender, EventArgs e) {
+
+      /*------------------------------------------------------------------------------------------------------------------------
+      | ESTABLISH TOPIC LOOKUP SERVICE
+      >-------------------------------------------------------------------------------------------------------------------------
+      | This ensures that the TopicFactory is able to correctly create `ConfigurableAttributeDescriptor` topics as their
+      | strongly typed class, which is necessary to provide access to members which parse and query the DefaultConfiguration
+      | property.
+      \-----------------------------------------------------------------------------------------------------------------------*/
+      TopicFactory.TypeLookupService = new OnTopic.Editor.Web.WebFormsTopicLookupService();
 
       /*------------------------------------------------------------------------------------------------------------------------
       | CONFIGURE REPOSITORY

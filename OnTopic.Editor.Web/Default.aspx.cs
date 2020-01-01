@@ -31,7 +31,7 @@ public partial class TopicsEditorPage : TopicPage {
   | PRIVATE FIELDS
   \---------------------------------------------------------------------------------------------------------------------------*/
   private       ContentTypeDescriptor           _contentType            = null;
-  private       List<Ignia.Topics.AttributeDescriptor>    _contentTypeAttributes  = null;
+  private       List<ConfigurableAttributeDescriptor> _contentTypeAttributes  = null;
 
   /*============================================================================================================================
   | PUBLIC PROPERTIES
@@ -204,7 +204,7 @@ public partial class TopicsEditorPage : TopicPage {
   ///   Automatically crawls up the ContentType hierarchy to add any Attributes inherited from parent ContentTypes; this
   ///   allows ContentTypes to be nested, thus deriving properties from their parents.
   /// </remarks>
-  public List<Ignia.Topics.AttributeDescriptor> ContentTypeAttributes {
+  public List<ConfigurableAttributeDescriptor> ContentTypeAttributes {
     get {
 
       /*------------------------------------------------------------------------------------------------------------------------
@@ -215,12 +215,12 @@ public partial class TopicsEditorPage : TopicPage {
       /*------------------------------------------------------------------------------------------------------------------------
       | Look up Content Type Topic Attributes
       \-----------------------------------------------------------------------------------------------------------------------*/
-      _contentTypeAttributes    = new List<Ignia.Topics.AttributeDescriptor>();
+      _contentTypeAttributes    = new List<ConfigurableAttributeDescriptor>();
 
       if (ContentType != null) {
 
         // Get Attributes
-        _contentTypeAttributes  = ContentType.AttributeDescriptors.ToList();
+        _contentTypeAttributes  = ContentType.AttributeDescriptors.Cast<ConfigurableAttributeDescriptor>().ToList();
 
         // Set Order
         _contentTypeAttributes  = _contentTypeAttributes
@@ -323,7 +323,7 @@ public partial class TopicsEditorPage : TopicPage {
     // Attributes are drawn based on the defined ContentType's Attributes, as opposed to the Attributes found in the current
     // Topic. As a result, any "ad hoc" attributes added programmatically or orphaned from a previous ContentType setting will
     // not be displayed.
-    foreach (Ignia.Topics.AttributeDescriptor contentTypeAttribute in ContentTypeAttributes) {
+    foreach (ConfigurableAttributeDescriptor contentTypeAttribute in ContentTypeAttributes) {
 
       /*------------------------------------------------------------------------------------------------------------------------
       | Ignore hidden Attributes
