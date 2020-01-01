@@ -195,3 +195,9 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# Excluded dependencies, which need to be manually maintained
+**/Common/Fonts
+**/Common/Scripts/ckeditor
+**/Common/Scripts/Vendor
+**/Images/Vendor/jQueryUI
