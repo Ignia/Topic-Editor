@@ -201,3 +201,6 @@ FakesAssemblies/
 **/Common/Scripts/ckeditor
 **/Common/Scripts/Vendor
 **/Images/Vendor/jQueryUI
+
+# Excluded secret files
+**/Configuration/connectionStrings.config
