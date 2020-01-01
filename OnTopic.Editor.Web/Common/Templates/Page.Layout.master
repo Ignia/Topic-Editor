@@ -1,0 +1,354 @@
+<%@ Master ClassName="EditorPageLayout" Language="C#" %>
+<%@ Import Namespace="Topics=OnTopic" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<Script RunAt="Server">
+
+/*==============================================================================================================================
+| PAGE LAYOUT MASTER TEMPLATE
+|
+| Author        Ignia, LLC
+| Project       OnTopic (Topics Editor)
+|
+| Purpose       Provides the default overall page layout for the site as well as methods and properties to aid in the creation
+|               of standardized inner page design. Intended to be inherited directly from a page or by a more granular
+|               content layout template.
+|
+>===============================================================================================================================
+| Revisions     Date            Author                  Comments
+| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+|               06.30.14        Katherine Trunkey       Created initial version.
+\-----------------------------------------------------------------------------------------------------------------------------*/
+
+  /*============================================================================================================================
+  | PRIVATE MEMBERS
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  private       bool            _dataBound      = false;
+  private       Topic           _pageTopic      = null;
+  private       Topic           _rootTopic      = null;
+  private       bool            _isTopicPage    = true;
+  private       string          _subTitle       = null;
+  private       bool            _isModal        = false;
+  private       Topic           _tier1Root      = null;
+  private       Topic           _tier2Root      = null;
+
+  /*============================================================================================================================
+  | IS TOPIC PAGE
+  >=============================================================================================================================
+  | Determines whether the page represents a distinct topic in the hierarchy, or whether the master page template is being used
+  | on another page (e.g., a form, 404 page, etc).
+  >=============================================================================================================================
+  | TODO: Remove? (Is this needed for the independent Editor interface?)
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  public bool IsTopicPage {
+    get {
+      return _isTopicPage;
+    }
+    set {
+      _isTopicPage = value;
+    }
+  }
+
+  /*============================================================================================================================
+  | PROPERTY: ENABLE VALIDATION
+  >=============================================================================================================================
+  | If enabled, PageTopic validation is performed, which checks for IsDisabled, PageID and URL.  This can optionally be
+  | disabled, which is useful for the Editor.
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  public bool EnableValidation {
+    get {
+      if (Page is TopicPage) {
+        return ((TopicPage)Page).EnableValidation;
+      }
+      else {
+        return false;
+      }
+    }
+    set {
+      if (Page is TopicPage) {
+        ((TopicPage)Page).EnableValidation = true;
+      }
+    }
+  }
+
+  /*============================================================================================================================
+  | PROPERTY: PAGE TOPIC
+  >=============================================================================================================================
+  | Identifies the topic associated with the page based on the RouteData. If the topic cannot be identified then a null
+  | reference is returned.
+  >=============================================================================================================================
+  | TODO: Verify how PageTopic is used exclusively within the editor.
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  public Topic PageTopic {
+    get {
+      if (Page is TopicPage) {
+        return ((TopicPage)Page).Topic;
+      }
+      else if (TopicRepository.RootTopic.Children.First() != null) {
+        return TopicRepository.DataProvider.Load(TopicRepository.RootTopic.Children.First().Key);
+      }
+      else {
+        return TopicRepository.DataProvider.Load("Root:Web");
+      }
+    }
+    set {
+      IsTopicPage = false;
+      if (Page is TopicPage) {
+        ((TopicPage)Page).Topic = value;
+      }
+    }
+  }
+
+  /*============================================================================================================================
+  | PROPERTY: ROOT TOPIC
+  >=============================================================================================================================
+  | Gets or sets the root topic to use for the navigation.
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  public Topic RootTopic {
+    get {
+      if (_rootTopic == null) {
+        _rootTopic = PageTopic;
+        while (_rootTopic.Parent != null && _rootTopic.Parent.Key != "Web" && _rootTopic.Parent.Key != "Root") {
+          _rootTopic = _rootTopic.Parent;
+        }
+      }
+      return _rootTopic;
+    }
+    set {
+      _rootTopic = value;
+    }
+  }
+
+  /*============================================================================================================================
+  | EDIT URL
+  >=============================================================================================================================
+  | Identifies the appropriate route to edit the current page.
+  >=============================================================================================================================
+  | TODO: Remove? (Is this needed for the independent Editor interface, or just for the resulting pages?)
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  public String EditUrl {
+    get {
+      if (Page is TopicPage) {
+        return ((TopicPage)Page).EditUrl;
+      }
+      else {
+        return "";
+      }
+    }
+  }
+
+  /*============================================================================================================================
+  | PROPERTY: IS MODAL
+  >=============================================================================================================================
+  | Gets or sets the editing state of the page; if true, removes all "chrome" elements and displays just the inner content body.
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  public bool IsModal {
+    get {
+      if (Request.QueryString["Modal"] != null) {
+        bool modalState;
+        if (Boolean.TryParse(Request.QueryString["Modal"].ToString(), out modalState)) {
+          _isModal = modalState;
+        }
+      }
+      return _isModal;
+    }
+    set {
+      _isModal = value;
+    }
+  }
+
+  /*============================================================================================================================
+  | PAGE INIT
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  void Page_Init(Object Src, EventArgs E) {
+
+    /*--------------------------------------------------------------------------------------------------------------------------
+    | Wire-up events
+    \-------------------------------------------------------------------------------------------------------------------------*/
+    DataBinding                += new EventHandler(Page_DataBinding);
+
+  }
+
+  /*============================================================================================================================
+  | PAGE LOAD
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  void Page_Load(Object Src, EventArgs E) {
+
+    /*--------------------------------------------------------------------------------------------------------------------------
+    | Set page title
+    \-------------------------------------------------------------------------------------------------------------------------*/
+    Page.Title                  = Page.Title + " - OnTopic";
+
+    /*--------------------------------------------------------------------------------------------------------------------------
+    | Ensure data binding
+    \-------------------------------------------------------------------------------------------------------------------------*/
+    if (!_dataBound) this.DataBind();
+
+  }
+
+  /*============================================================================================================================
+  | DATA BIND
+  \---------------------------------------------------------------------------------------------------------------------------*/
+  void Page_DataBinding(Object Src, EventArgs E) {
+    _dataBound                  = true;
+  }
+
+</Script><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head RunAt="Server">
+    <title>OnTopic Structured Data Editor</title>
+
+    <asp:PlaceHolder Visible=<%# IsTopicPage %> RunAt="Server">
+      <link rel="canonical" href="<%# PageTopic.GetWebPath() %>" />
+    </asp:PlaceHolder>
+
+    <!-- jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- ExtJS Scripts -->
+    <script src="/!Admin/Topics/Common/Scripts/Vendor/ExtJS/ext-base.js"></script>
+    <script src="/!Admin/Topics/Common/Scripts/Vendor/ExtJS/ext-all.js"></script>
+    <script src="/!Admin/Topics/Common/Scripts/Vendor/ExtJS/ext-ExtendTextField.js"></script>
+
+    <!-- Bootstrap Scripts -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- ExtJS Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/!Admin/Topics/Common/Scripts/Vendor/ExtJS/Resources/css/ext-all.css" />
+    <link rel="stylesheet" type="text/css" href="/!Admin/Topics/Common/Scripts/Vendor/ExtJS/Resources/css/xtheme-gray.css" />
+
+    <!-- Font Awesome Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    <!-- Site Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/!Admin/Topics/Common/Styles/Site.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/!Admin/Topics/Common/Styles/Site.min.css" /> -->
+
+    <asp:ContentPlaceHolder ID="PageHead" RunAt="Server" />
+
+  </head>
+  <body<%# ((IsModal)? " class=\"Modal\"" : "") %>>
+    <form name="EditorForm" class="Editor-Form" RunAt="Server">
+
+      <div style="display: none;"><%# ((TopicRepository.RootTopic.Children.First() != null)? TopicRepository.RootTopic.Children.First().Key : "null") %></div>
+      <asp:ContentPlaceHolder ID="HeaderArea" RunAt="Server">
+
+        <asp:ContentPlaceHolder ID="HeaderContainer" RunAt="Server">
+          <asp:PlaceHolder Visible=<%# !IsModal %> RunAt="Server">
+            <div id="HeaderArea" class="navbar navbar-fixed-top">
+              <header>
+                <!-- Header Container -->
+                <div id="HeaderContainer" class="container Header">
+                  <div class="row">
+
+                    <asp:PlaceHolder Visible=<%# !IsModal %> RunAt="Server">
+                      <!-- Site Name -->
+                      <div class="col-md-2 col-sm-3 Site-Name">
+                        <h1 class="h2"><a href="/!Admin/Topics/Default.aspx" style="color:rgb(255,255,255);text-decoration:none;">OnTopic</a></h1>
+                      </div>
+                      <!-- /Site Name -->
+                    </asp:PlaceHolder>
+
+                    <!-- Site Description -->
+                    <div class="<%# (IsModal? "col-md-12 col-sm-12 Modal" : "col-md-10 col-sm-9") %> Page-Title-Area">
+                      <asp:ContentPlaceHolder ID="PageTitleArea" RunAt="Server">
+                        <h2 class="Page-Title"><%# (PageTopic == TopicRepository.RootTopic)? Page.Title : PageTopic.Attributes.GetValue("Title", PageTopic.Key) %></h2>
+                      </asp:ContentPlaceHolder>
+                    </div>
+                    <!-- /Site Description -->
+
+                  </div>
+                </div>
+                <!-- /Header Container -->
+              </header>
+            </div>
+          </asp:PlaceHolder>
+        </asp:ContentPlaceHolder>
+
+      </asp:ContentPlaceHolder>
+
+      <asp:ContentPlaceHolder ID="BodyArea" RunAt="Server">
+
+        <div id="<%# ((IsModal)? "Modal_" : "") %>BodyArea" class="container<%# ((IsModal)? "-fluid" : "") %> Content-Container<%# ((IsModal)? " Modal" : "") %>">
+          <div class="row">
+
+            <asp:PlaceHolder Visible=<%# !IsModal %> RunAt="Server">
+              <!-- Primary Sidebar -->
+              <div class="col-md-2 col-sm-3 Sidebar">
+                <div id="FixedSidebar">
+
+                  <asp:ContentPlaceHolder ID="Tier2NavigationContainer" RunAt="Server">
+                    <div id="Tier2Navigation">
+
+                      <asp:PlaceHolder ID="TreeView" RunAt="Server">
+                        <!-- Tier 2 Navigation Treeview -->
+                        <div id="TreeView"></div>
+                        <!-- /Tier 2 Navigation Treeview -->
+                      </asp:PlaceHolder>
+
+                    </div>
+                  </asp:ContentPlaceHolder>
+
+                  <asp:ContentPlaceHolder ID="ModulesContainer" RunAt="Server" />
+
+                </div>
+              </div>
+              <!-- /Primary Sidebar -->
+            </asp:PlaceHolder>
+
+            <asp:ContentPlaceHolder ID="ContentArea" RunAt="Server">
+              <div class="<%# (IsModal? "col-sm-12 Modal" : "col-md-10 col-sm-9") %> Content">
+
+                <asp:ContentPlaceHolder ID="ContentContainer" RunAt="Server">
+
+                  <div id="PageContentArea" class="Page-Content Primary">
+                    <asp:ContentPlaceHolder ID="Content" RunAt="Server" />
+                  </div>
+
+                </asp:ContentPlaceHolder>
+
+                <asp:Panel Visible="false" RunAt="Server">
+                  <!-- IsTopicPage && Roles.IsUserInRole(Page.User.Identity.Name, "Administrators") -->
+                  [<a href="<%= EditUrl %>">Edit</a>]
+                  <asp:PlaceHolder Visible=<%# Request.QueryString["Debug"] == null %> RunAt="Server">
+                    [<a href="?Debug=1">Debug</a>]
+                  </asp:PlaceHolder>
+                  <asp:PlaceHolder Visible=<%# Request.QueryString["Debug"] != null %> RunAt="Server">
+                    [<a href="?"><s>Debug</s></a>]
+                  </asp:PlaceHolder>
+                  [<a href="#" onclick="Ext.Msg.alert('Permanent Link', 'http://<%# HttpContext.Current.Request.Url.Host %>/Topic/<%# PageTopic.Id %>/')">Permanent Link</a>]
+                </asp:Panel>
+                <asp:Panel Visible=<%# (Request.QueryString["Debug"] != null) %> RunAt="Server">
+                  <h2>Topic Attributes</h2>
+                  <ul>
+                    <% foreach (AttributeValue attributeValue in PageTopic.Attributes) {
+                         if (attributeValue.Value == "Body") continue;
+                         Response.Write("<li><b>" + attributeValue.Key + "</b>: " + attributeValue.Value + ((attributeValue.Value.Length == 124)? "..." : "") + "</li>");
+                       }
+                    %>
+                  </ul>
+                </asp:Panel>
+
+              </div>
+            </asp:ContentPlaceHolder>
+
+          </div>
+        </div>
+      </asp:ContentPlaceHolder>
+
+      <asp:ContentPlaceHolder ID="PageEnd" RunAt="Server" />
+
+    </form>
+
+    <script src="/!Admin/Topics/Common/Scripts/Vendor/Skrollr/skrollr.stylesheets.min.js"></script>
+    <script src="/!Admin/Topics/Common/Scripts/Vendor/Skrollr/skrollr.min.js"></script>
+    <asp:ContentPlaceHolder ID="PageScriptsArea" RunAt="Server">
+      <asp:ContentPlaceHolder ID="PageScripts" RunAt="Server" />
+    </asp:ContentPlaceHolder>
+
+  </body>
+</html>
+
+
+
+
+
