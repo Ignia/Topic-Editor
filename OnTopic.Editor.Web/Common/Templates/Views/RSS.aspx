@@ -2,7 +2,7 @@
 
 <%@ MasterType virtualPath="Common/Templates/Page.Layout.Master" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 
 <asp:Content ContentPlaceHolderId="Content" RunAt="Server">
 

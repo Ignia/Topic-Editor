@@ -1,6 +1,6 @@
-<%@ Control Language="C#" ClassName="File" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="File" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 <%@ Import Namespace="System.IO" %>
 
 <Script RunAt="Server">

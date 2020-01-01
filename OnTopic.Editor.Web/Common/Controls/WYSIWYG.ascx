@@ -1,6 +1,6 @@
-<%@ Control Language="C#" ClassName="Wysiwyg" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="Wysiwyg" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 
 <Script RunAt="Server">
 

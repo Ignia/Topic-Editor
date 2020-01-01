@@ -6,6 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
     </ProductVersion>
+    <LangVersion>6</LangVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5CEBC2AE-7A33-4F8A-B45F-29BEFB56E013}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -55,6 +56,9 @@
     </Reference>
     <Reference Include="OnTopic.Data.Sql, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OnTopic.Data.Sql.4.0.0\lib\netstandard2.0\OnTopic.Data.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="OnTopic.Web, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OnTopic.Web.4.0.0-alpha.2\lib\net48\OnTopic.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
@@ -123,7 +127,9 @@
   <ItemGroup>
     <Content Include="Common\Templates\Page.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Templates\Layout.master.cs">

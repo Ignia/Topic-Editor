@@ -1,6 +1,6 @@
 <%@ Page Language="C#" %>
 
-<%@ Import nameSpace="Ignia.Topics" %>
+<%@ Import nameSpace="OnTopic" %>
 
 <script runat="server">
 
@@ -58,7 +58,7 @@
       Response.Write(AddNodeToOutput(topicRoot, 1));
       }
     else {
-      foreach (Topic topic in topicRoot.Values) {
+      foreach (Topic topic in topicRoot.Children) {
         Response.Write(AddNodeToOutput(topic, 1));
         }
       }
@@ -81,9 +81,9 @@
       _isFirstNode = false;
       }
 
-    output += indent + "<item id=\"" + topic.ID + "\" text=\"" + HttpUtility.HtmlAttributeEncode(topic.Key) + "\" " + initializer + ">\n";
+    output += indent + "<item id=\"" + topic.Id + "\" text=\"" + HttpUtility.HtmlAttributeEncode(topic.Key) + "\" " + initializer + ">\n";
 
-    foreach (Topic childNode in topic.Values) {
+    foreach (Topic childNode in topic.Children) {
       output += AddNodeToOutput(childNode, indentLevel+1);
       }
 

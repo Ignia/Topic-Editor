@@ -1,7 +1,7 @@
-<%@ Control Language="C#" ClassName="LastModifiedBy" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="LastModifiedBy" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
 <%@ Import Namespace="System.Web" %>
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 
 <Script RunAt="Server">
 

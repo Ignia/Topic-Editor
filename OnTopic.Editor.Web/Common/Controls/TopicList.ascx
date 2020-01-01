@@ -1,6 +1,6 @@
-<%@ Control Language="C#" ClassName="TopicList" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="TopicList" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 
 <%@ Register TagPrefix="ITE" TagName="TopicLookup" Src="TopicLookup.ascx" %>
 

@@ -1,8 +1,8 @@
-<%@ Control Language="C#" ClassName="TopicLookup" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="TopicLookup" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Topics=Ignia.Topics" %>
-<%@ Import Namespace="Ignia.Topics.Collections" %>
-<%@ Import Namespace="Ignia.Topics.Querying" %>
+<%@ Import Namespace="Topics=OnTopic" %>
+<%@ Import Namespace="OnTopic.Collections" %>
+<%@ Import Namespace="OnTopic.Querying" %>
 <%@ Import Namespace="System.Web" %>
 <%@ Import Namespace="System.Web.UI" %>
 <%@ Import Namespace="System.Collections.ObjectModel" %>
@@ -239,8 +239,8 @@
       /*------------------------------------------------------------------------------------------------------------------------
       | Instantiate object
       \-----------------------------------------------------------------------------------------------------------------------*/
-      TopicCollection<Topics.Topic> topics      = new TopicCollection<Topics.Topic>();
-      Topics.Topic topic                        = new Topics.Topic();
+      TopicCollection<Topic> topics             = new TopicCollection<Topics.Topic>();
+      Topic topic                               = null;
 
       if (Scope != null) {
         topic                   = TopicRepository.DataProvider.Load(Scope);

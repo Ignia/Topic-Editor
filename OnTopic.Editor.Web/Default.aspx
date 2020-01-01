@@ -2,7 +2,7 @@
 
 <%@ MasterType virtualPath="Common/Templates/Page.Layout.Master" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 
 <%@ Register TagPrefix="Ignia"  TagName="ClientValidation"      Src="/Common/Global/Controls/ClientValidation.ascx" %>
 <%@ Register TagPrefix="ITE"    TagName="Relationships"         Src="Common/Controls/Relationships.ascx" %>

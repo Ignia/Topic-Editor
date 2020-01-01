@@ -15,10 +15,12 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Ignia.Topics;
-using Ignia.Topics.Collections;
-using Ignia.Topics.Web.Editor;
-using Ignia.Topics.Web;
+using OnTopic;
+using OnTopic.Attributes;
+using OnTopic.Collections;
+using OnTopic.Metadata;
+using OnTopic.Web.Editor;
+using OnTopic.Web;
 
 /*==============================================================================================================================
 | CLASS: TOPICS EDITOR PAGE
@@ -722,7 +724,7 @@ public partial class TopicsEditorPage : TopicPage {
   ///   not contain non-alphanumeric characters; fires on server validation.
   /// </summary>
   /// <remarks>
-  ///   Legacy / deprecated; ValidateKey is now part of the Ignia.Topics Topic class.
+  ///   Legacy / deprecated; ValidateKey is now part of the OnTopic Topic class.
   /// </remarks>
   protected void ValidateTopicKey(object source, ServerValidateEventArgs args) {
 
@@ -762,7 +764,7 @@ public partial class TopicsEditorPage : TopicPage {
   | WEB METHOD: MOVE NODE
   \---------------------------------------------------------------------------------------------------------------------------*/
   /// <summary>
-  ///   AJAX-parsable, querystring-configurable wrapper to the Ignia.Topics engine code that moves a node from one place in the
+  ///   AJAX-parsable, querystring-configurable wrapper to the OnTopic engine code that moves a node from one place in the
   ///   hierarchy to another. "true" if succeeded, Returns "false" if failure, as string values. The JS throws a generic
   ///   "failure" error on "false".
   /// </summary>

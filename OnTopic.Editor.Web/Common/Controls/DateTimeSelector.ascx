@@ -1,6 +1,6 @@
-<%@ Control Language="C#" ClassName="DateTimeSelector" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="DateTimeSelector" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Web" %>
 <%@ Import Namespace="System.Web.UI" %>

@@ -2,7 +2,7 @@
 
 <%@ OutputCache CacheProfile="Server" %>
 
-<%@ Import nameSpace="Ignia.Topics" %>
+<%@ Import nameSpace="OnTopic" %>
 
 <script runat="server">
 

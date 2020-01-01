@@ -1,6 +1,6 @@
-<%@ Control Language="C#" ClassName="FileUpload" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="FileUpload" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 <%@ Import Namespace="System.IO" %>
 
 <Script RunAt="Server">

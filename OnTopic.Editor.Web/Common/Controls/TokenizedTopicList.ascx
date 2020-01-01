@@ -1,6 +1,6 @@
-<%@ Control Language="C#" ClassName="TokenizedTopicList" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="TokenizedTopicList" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 <%@ Import Namespace="System.Web" %>
 <%@ Import Namespace="System.Web.UI" %>
 <%@ Import Namespace="System.Collections.ObjectModel" %>

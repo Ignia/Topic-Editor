@@ -1,6 +1,6 @@
-<%@ Control Language="C#" ClassName="TopicPointer" Inherits="Ignia.Topics.Web.Editor.AttributeTypeControl" %>
+<%@ Control Language="C#" ClassName="TopicPointer" Inherits="OnTopic.Web.Editor.AttributeTypeControl" %>
 
-<%@ Import Namespace="Ignia.Topics" %>
+<%@ Import Namespace="OnTopic" %>
 
 <%@ Register TagPrefix="ITE" TagName="TokenizedTopicList" Src="TokenizedTopicList.ascx" %>
 
