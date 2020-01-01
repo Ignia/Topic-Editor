@@ -70,7 +70,6 @@
     <Content Include="Common\Controls\TopicLookup.ascx" />
     <Content Include="Common\Controls\TopicPointer.ascx" />
     <Content Include="Common\Controls\WYSIWYG.ascx" />
-    <Content Include="Common\Layout.css" />
     <Content Include="Common\Scripts\Common.Functions.js" />
     <Content Include="Common\Scripts\Modal.js" />
     <Content Include="Common\Scripts\TokenizedTopicList.js" />
@@ -968,7 +967,6 @@
     <Content Include="Common\Styles\Vendor\TrentRichardson\jquery-ui-timepicker-addon.css" />
     <Content Include="Common\Styles\Vendor\TrentRichardson\jquery-ui-timepicker-addon.min.css" />
     <Content Include="Common\Templates\EditorModal.ascx" />
-    <Content Include="Common\Templates\Views\RSS.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
