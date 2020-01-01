@@ -55,9 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\Sitemap.xml.aspx" />
     <Content Include="Client\Topics.Json.aspx" />
-    <Content Include="Client\Topics.xml.aspx" />
     <Content Include="Common\Controls\Boolean.ascx" />
     <Content Include="Common\Controls\DateTimeSelector.ascx" />
     <Content Include="Common\Controls\File.ascx" />
