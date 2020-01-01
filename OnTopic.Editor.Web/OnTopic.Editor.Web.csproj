@@ -1093,6 +1093,9 @@
     <Folder Include="Common\Scripts\Vendor\ExtJS\resources\images\vista\dd\" />
     <Folder Include="Common\Scripts\Vendor\ExtJS\resources\images\vista\tree\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
